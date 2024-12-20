@@ -62,8 +62,11 @@
             <input type="email" id="email" name="email" placeholder="Your Email" required>
 
             <label for="phone">Phone</label>
-            <input type="tel" id="phone" name="phone" placeholder="Your Phone" pattern="\\+?[0-9]*" inputmode="tel"
+            <input type="tel" id="phone" name="phone" placeholder="Your Phone" pattern="^\+?[0-9]{10,15}$" inputmode="tel"
                    title="Enter a valid phone number" required>
+
+            <label for="subject">Subject:</label>
+            <input type="text" id="subject" name="subject" placeholder="Enter Subject" required>
 
             <label for="message">Message</label>
             <textarea id="message" name="message" placeholder="Your Message" rows="8" required></textarea>
