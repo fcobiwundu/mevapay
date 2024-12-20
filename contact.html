@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mevapay - Contact </title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+<header class="sticky-header">
+    <div class="header-container">
+        <div class="logo">
+            <img src="resources/images/logo.svg" alt="Mevapay Logo" >
+        </div>
+        <!-- Burger Menu for Mobile -->
+        <div class="burger-menu" id="burger-menu">
+            <span></span>
+            <span class="orange"></span>
+            <span></span>
+        </div>
+        <!-- Navigation Links -->
+        <nav class="nav-links" id="nav-links">
+            <a href="login.html" class="btn">Login</a>
+            <a href="signup.html" class="btn">Sign Up</a>
+        </nav>
+    </div>
+</header>
+
+<div class="contact-container">
+    <!-- Left Section -->
+    <div class="contact-info">
+        <h3>Let’s get in touch</h3>
+        <p>We’d love to hear from you! Reach out to us for any inquiries, feedback, or assistance.</p>
+        <ul>
+<!--            <li><strong>Address:</strong> 92 Cherry Drive Uniondale, NY 11553</li>-->
+
+            <li style="font-size: 15px"><strong>Email:</strong>
+                <a style="color: #555" href="mailto:support@mevapay.com.ng">support@mevapay.com.ng</a>
+            </li>
+            <li style="font-size: 14px"> <strong>Phone:</strong> +234 123 456 789</li>
+        </ul>
+        <h4 style="font-size: 16px; justify-self: center; color: #333">Connect with us:</h4>
+        <div class="social-icons">
+            <a href="#">Facebook</a>
+            <a href="#">Twitter</a>
+            <a href="#">Instagram</a>
+            <a href="#">LinkedIn</a>
+        </div>
+    </div>
+
+    <!-- Right Section -->
+    <div class="contact-form">
+        <h3>Contact Us</h3>
+        <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="47dc12b0-fba3-43c9-8c4a-209f566317d0">
+
+            <label for="name">Username</label>
+            <input type="text" id="name" name="name" placeholder="Your Userame" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Your Email" required>
+
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="Your Phone" pattern="\\+?[0-9]*" inputmode="tel"
+                   title="Enter a valid phone number" required>
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Your Message" rows="8" required></textarea>
+
+            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+            <button type="submit">Send</button>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <!-- Overlapping CTA Container -->
+    <div class="cta-container">
+        <h3>Create an account in one click</h3>
+        <button>
+            <a href="signup.html" class="btn">Sign Up</a>
+        </button>
+    </div>
+
+    <!-- Footer Content -->
+    <div class="footer-content">
+        <!-- Social Icons -->
+        <div class="social-icons">
+            <a href="#" class="social-icon">Facebook</a>
+            <a href="#" class="social-icon">Instagram</a>
+            <a href="#" class="social-icon">Twitter</a>
+            <a href="#" class="social-icon">Linkedln</a>
+        </div>
+
+        <div>
+            <ul class="footer-links">
+                <li>
+                    <h3>Company</h3>
+                    <a href="about-us.html">About</a>
+                    <a href="#">Press</a>
+                    <a href="#">Partners</a>
+                    <a href="#">Careers</a>
+                </li>
+                <li>
+                    <h3>Legal</h3>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms & conditions</a>
+                    <a href="#">complaints</a>
+                </li>
+                <li>
+                    <h3>Help</h3>
+                    <a href="faqs.html">FAQs</a>
+                    <a href="#">Security</a>
+                    <a href="contact.html">Contact Us</a>
+                </li>
+                <li>
+                    <h3>Lorem</h3>
+                    <a href="#">Ipsum</a>
+                    <a href="#">Lorem ipsum.</a>
+                    <a href="#">Odor amet</a>
+                    <a href="#">consectetuer</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="copyright">
+            <p>© 2024 Mevapay Solutions. All rights reserved.</p>
+        </div>
+    </div>
+
+</footer>
+
+</body>
+</html>

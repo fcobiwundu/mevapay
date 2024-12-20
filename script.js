@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
         },
-        { threshold: 0.2 }
+        {threshold: 0.2}
     );
 
     cards.forEach((card) => {
@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
         },
-        { threshold: 0.3 } // Adjust for when you want the flip to trigger (30% in view)
+        {threshold: 0.3} // Adjust for when you want the flip to trigger (30% in view)
     );
 
     cards.forEach((card) => {
@@ -121,3 +121,64 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+
+// <textarea id="message" name="message" placeholder="Your Message" rows="6" required></textarea>
+// <p id="wordCount">0/100 words</p>
+//
+// <script>
+//     const textarea = document.getElementById('message');
+//     const wordCountDisplay = document.getElementById('wordCount');
+//     const maxWords = 100;
+//
+//     textarea.addEventListener('input', () => {
+//     const words = textarea.value.trim().split(/\s+/); // Split input by spaces
+//     const wordCount = words.filter(word => word.length > 0).length;
+//
+//     if (wordCount > maxWords) {
+//     textarea.value = words.slice(0, maxWords).join(' '); // Truncate to max words
+// }
+//
+//     wordCountDisplay.textContent = `${Math.min(wordCount, maxWords)}/${maxWords} words`;
+// });
+// </script>
+
+
+// contact form
+// Trigger fade-in animation for contact sections when scrolling
+document.addEventListener("scroll", () => {
+    const contactSections = document.querySelectorAll('.contact-info, .contact-form');
+    const scrollPosition = window.scrollY + window.innerHeight;
+
+    contactSections.forEach((section) => {
+        if (scrollPosition > section.offsetTop + 50) {
+            section.style.opacity = "1";
+            section.style.transform = "translateY(0)";
+        }
+    });
+});
+
+// Form validation
+document.getElementById('contactForm').addEventListener('submit', function (event) {
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    if (!name || !email || !phone || !message) {
+        event.preventDefault(); // Prevent form submission
+        alert('Please fill in all fields before submitting.');
+    }
+
+    // alert('Your message has been sent successfully!');
+});
+
+// document.getElementById('phone').addEventListener('input', function (event) {
+//     // Step 1: Replace any characters that are not numbers or the '+' symbol
+//     this.value = this.value.replace(/[^0-9+]/g, '');
+//
+//     // Step 2: Ensure that '+' appears only at the start of the input
+//     if (this.value.indexOf('+') > 0) {
+//         // If '+' is not the first character, remove all instances of '+'
+//         this.value = this.value.replace(/\+/g, '');
+//     }
+// });
