@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Data</title>
+  <!-- Include your CSS files -->
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/servicesComponents.css" />
+  <link rel="stylesheet" href="css/data.css" />
+  <!-- Loading CSS -->
+  <link rel="stylesheet" href="css/loading.css" />
+  <style>
+
+    .service-providers {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 0;
+    }
+
+    .service-provider-logo {
+      height: 40px;
+      cursor: pointer;
+      transition: transform 0.3s;
+      opacity: 0.8;
+    }
+    .service-provider-logo.active {
+      margin-top: 0.7rem;
+      transform: scale(1.3);
+      opacity: 1;
+      border-radius: 50%;
+      border: none;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .phone-input {
+      margin: 1rem 0;
+      text-align: center;
+    }
+    .phone-input input {
+      padding: 0.75rem;
+      font-size: 1rem;
+      width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      outline: none;
+    }
+    .phone-input input:focus {
+      transform: scale(1.01);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .phone-input input.invalid {
+      border: 1px solid red !important; /* Force a red border if invalid */
+    }
+    .error-message {
+      margin: 0.7rem 0 0 0;
+      padding: 0;
+      color: red;
+      font-size: 0.9rem;
+      text-align: left;
+    }
+
+    /* Hide default password field icons in some browsers (Edge/IE) */
+    input[type=password]::-ms-reveal,
+    input[type=password]::-ms-clear {
+      display: none !important;
+    }
+    /* Hide default icon in Chrome  */
+    input[type=password]::-webkit-textfield-decoration,
+    input[type=password]::-webkit-textfield-decoration-button {
+      display: none !important;
+    }
+
+    /* "No Number" modal on top of Payment/Pin*/
+    #no-number-modal {
+      z-index: 2000;
+      padding: 2rem;
+    }
+    body.no-number-modal-open {
+      overflow: hidden;
+      height: 100vh;
+      position: fixed;
+      width: 100%;
+      touch-action: none;
+    }
+
+    /* Tabs Section */
+    .tabs-container {
+      overflow: hidden;
+      background-color: #fff;
+      transition: transform 0.3s ease-in-out;
+    }
+    .tabs {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #ddd;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .tabs::-webkit-scrollbar {
+      display: none;
+    }
+    .tab {
+      flex: 1;
+      text-align: center;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border: none;
+      background: none;
+      transition: color 0.2s ease-in-out;
+      white-space: nowrap;
+      font-size: 1rem;
+    }
+    .tab.active {
+      color: #007bff;
+      font-weight: bold;
+      border-bottom: 2px solid #007bff;
+    }
+
+    /* Sliding Offers Grid */
+    .offers-grid-container {
+      overflow: hidden;
+      position: relative;
+    }
+    .offers-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+      padding-bottom: 1rem;
+    }
+    .offers-grid p {
+      text-align: center;
+      grid-column: 1 / -1;
+      margin: 0 auto;
+    }
+    .offer-card {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 0.5rem;
+      text-align: center;
+      font-size: 0.9rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin: 0;
+    }
+    .offer-card p {
+      margin: 0;
+      line-height: 1.5;
+    }
+    .offer-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* ===== Modal Styles ===== */
+    body.modal-open {
+      overflow: hidden;
+      height: 100vh;
+      position: fixed;
+      width: 100%;
+      touch-action: none;
+    }
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease-in-out;
+    }
+    .modal.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-content {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+      position: relative;
+    }
+    .modal-buttons {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 1rem;
+    }
+    button {
+      padding: 13px 20px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+
+    #got-it-btn, #got-it-btn-insufficient {
+      background: var(--primary, #007BFF);
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+    #got-it-btn:hover, #got-it-btn-insufficient:hover {
+      background: var(--white, #fff);
+      color: var(--primary, #007BFF);
+      border: 1px solid var(--primary, #007BFF);
+    }
+
+    #cancel-btn {
+      background-color: var(--light-blue-accent);
+      color: #333;
+    }
+    #continue-btn {
+      background: var(--primary, #007BFF);
+      color: white;
+    }
+    #confirm-to-pay,
+    #submit-pin {
+      background: var(--primary, #007BFF);
+      color: white;
+    }
+    #confirm-to-pay:hover,
+    #submit-pin:hover, 
+    #continue-btn:hover,
+    #cancel-btn:hover{
+      background: var(--white, #fff);
+      color: var(--primary, #007BFF);
+      border: 1px solid var(--primary, #007BFF);
+    }
+
+    .cancel-icon {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .hidden {
+      display: none;
+    }
+
+    /* PIN Field + Eye Icon */
+    .pin-input {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 1rem 0;
+    }
+    #pin-field {
+      width: 50%;
+      padding: 0.5rem;
+      font-size: 1.5rem;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .eye-icon {
+      margin-left: 0.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+    .eye-icon img {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Payment Modal Layout */
+    .payment-modal-content {
+      position: relative;
+      padding: 1rem;
+    }
+    .payment-header {
+      position: relative;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .payment-header h4 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.25rem;
+      color: #555;
+    }
+    .payment-total {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--primary);
+      margin: 0;
+    }
+    .payment-info-box {
+      background-color: #f8f8f8;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+    /* For "strong on the left, span on the right" */
+    .payment-line {
+      display: flex;
+      justify-content: space-between;
+      margin: 0.5rem 0;
+    }
+    .payment-line strong {
+      margin-right: 1rem;
+      font-weight: bold;
+    }
+
+    .payment-method-box {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      text-align: left;
+      border: 1px solid #eee;
+    }
+    .payment-method-box h5 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1rem;
+    }
+    #sample-method {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #444;
+    }
+
+    .reward-section-box {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid #eee;
+      text-align: left;
+    }
+    .reward-section-box h5 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1rem;
+    }
+    .confirm-pay-button {
+      width: 100%;
+      background-color: var(--primary);
+      color: #fff;
+      padding: 0.75rem;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+    }
+    #payment-close-icon {
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 1.7rem;
+      cursor: pointer;
+      margin: 0.5rem;
+      color: #999999;
+    }
+
+    #pin-close-icon {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    #cancel-modal {
+      z-index: 2000;
+    }
+    
+    #cancel-modal .modal-content {
+      max-width: 300px;
+    }
+    #cancel-modal .modal-buttons {
+      display: flex;
+      flex-direction: column;
+      margin-top: 1rem;
+    }
+    #cancel-modal .modal-buttons button {
+      margin: 0.5rem 0;
+    }
+
+    /* Insufficient Balance Modal */
+    #insufficient-balance-modal {
+      z-index: 2000; 
+    }
+    #insufficient-balance-modal .modal-content {
+      max-width: 400px;
+    }
+    #insufficient-balance-modal p {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .service-providers-logo {
+        width: 40px;
+        height: 40px;
+      }
+      .main-container {
+        max-width: 100%;
+      }
+      .offer-card {
+        font-size: 0.8rem;
+      }
+      header p {
+        font-size: 1rem;
+      }
+      .tabs {
+        overflow-x: auto;
+      }
+      .offers-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+      }
+    }
+    @media (max-width: 480px) {
+      .offers-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+        padding: 0rem 0 1rem;
+      }
+      .offer-card {
+        font-size: 0.7rem;
+      }
+    }
+
+    /* Services container */
+    .more-services-container {
+      padding: 1rem;
+      background-color: #f7f7f7;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin: 0 auto;
+    }
+    .more-services-container p {
+      font-size: 0.99rem;
+      margin: 0 3px 1rem;
+      text-align: left;
+    }
+    a.more-service-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 10px 0;
+      padding: 1rem;
+      background-color: #fff;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+      text-decoration: none;
+      color: inherit;
+    }
+    a.more-service-item:hover {
+      background-color: #f0f0f0;
+    }
+    .icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #fff;
+      border-radius: 50%;
+      padding: 5px;
+      margin-right: 15px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    .icon img {
+      max-width: 100%;
+      height: auto;
+    }
+    .details {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      flex-grow: 1;
+    }
+    .details span {
+      font-size: 1rem;
+      color: #146EF5; /* Primary color */
+    }
+    .details p {
+      font-size: 0.9rem;
+      color: #555;
+      margin: 0;
+    }
+    .chevron {
+      margin-left: auto;
+      border: solid #ccc;
+      border-width: 0 2px 2px 0;
+      display: inline-block;
+      padding: 4px;
+      transform: rotate(-45deg);
+      transition: transform 0.3s ease;
+    }
+    a.more-service-item:hover .chevron {
+      border: solid var(--primary);
+      margin-left: auto;
+      border-width: 0 2px 2px 0;
+      display: inline-block;
+      padding: 4px;
+      transform: rotate(-45deg);
+      transition: transform 0.3s ease;
+    }
+    @media (max-width: 768px) {
+      a.more-service-item {
+        flex-direction: row;
+        align-items: center;
+      }
+      .icon {
+        margin-bottom: 0;
+      }
+      .details {
+        padding-left: 0;
+      }
+      .arrow {
+        margin-top: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+
+  <div id="loader-container"></div>
+
+  <!-- Header -->
+  <header>
+    <a href="dashboard.html" aria-label="Go back to dashboard">
+      <img src="assets/images/icons/back-icon.svg" alt="Back" />
+    </a>
+    <p>Data</p>
+  </header>
+
+  <!-- Main Container -->
+  <div class="main-container">
+    <!-- Promo Banner -->
+    <div class="promo-banner">
+      <div class="promo-content">
+        <img src="assets/images/mockups/hero_phone_mock.svg" alt="Security Shield" />
+        
+        <div class="text-content">
+          <h2>Privacy And Security+</h2>
+          <p>Trusted By Millions Of Users</p>
+          <button class="cta-button">Try now!</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Info Section -->
+    <div class="info-section">
+      <p>Enjoy up to 2% cashback, with a maximum of ₦30, on your first two Airtel bundle recharges daily.</p>
+    </div>
+
+    <!-- Network Provider Logos -->
+    <h4>Select Your Service Provider</h4>
+    <div class="service-providers">
+      <img src="assets/images/icons/airtel-logo.svg" alt="Airtel" class="service-provider-logo" data-network="airtel">
+      <img src="assets/images/icons/mtn-logo.svg" alt="MTN" class="service-provider-logo" data-network="mtn">
+      <img src="assets/images/icons/glo-logo.svg" alt="Glo" class="service-provider-logo" data-network="glo">
+      <img src="assets/images/icons/9mobile-logo.svg" alt="9Mobile" class="service-provider-logo" data-network="9mobile">
+    </div>
+
+    <!-- Phone Input -->
+    <div class="phone-input">
+      <label for="recipient-phone" style="display:block; text-align:left; font-weight:bold;">
+        Phone Number:
+      </label>
+      <input type="text" id="recipient-phone" placeholder="Enter recipient phone number" maxlength="11">
+      <p id="phone-error" class="error-message"></p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs-container">
+      <div class="tabs">
+        <button class="tab active" data-tab="sme">SME</button>
+        <button class="tab" data-tab="sme2">SME2</button>
+        <button class="tab" data-tab="cg">CG</button>
+        <button class="tab" data-tab="gifting">Gifting</button>
+      </div>
+    </div>
+
+    <!-- Offers Grid -->
+    <div class="offers-grid-container">
+      <div id="offers-grid" class="offers-grid">
+        <!-- Offers will be dynamically loaded here -->
+      </div>
+    </div>
+
+    <!-- Confirmation (Cancel) Modal -->
+    <div id="cancel-modal" class="modal hidden">
+      <div class="modal-content">
+        <p>Payment is not yet complete. Are you confirm to leave?</p>
+        <div class="modal-buttons">
+          <button id="cancel-btn">cancel</button>
+          <button id="continue-btn">Continue</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="payment-modal" class="modal hidden">
+      <div class="modal-content payment-modal-content">
+        <div class="payment-header">
+          <!-- <h4>Payment</h4> -->
+          <p class="payment-total" id="payment-total">₦0.00</p>
+          <span id="payment-close-icon" class="cancel-icon">&times;</span>
+        </div>
+
+        <!-- Payment details -->
+        <div class="payment-info-box">
+          <!-- strong on left, span on right -->
+          <p class="payment-line">
+            <strong>Amount:</strong>
+            <span id="payment-amount"></span>
+          </p>
+          <p class="payment-line">
+            <strong>Biller Name:</strong>
+            <span id="biller-name"></span>
+          </p>
+          <p class="payment-line">
+            <strong>Recipient Mobile Number:</strong>
+            <span id="recipient-number"></span>
+          </p>
+        </div>
+
+        <div class="payment-method-box">
+          <h5>Payment Method</h5>
+          <p id="sample-method">
+            Wallet
+            <!-- <strong>Wallet</strong><br> -->
+            <small></small>
+          </p>
+        </div>
+
+        <div class="reward-section-box">
+          <h5>Reward to Claim</h5>
+          <p>MevaPoints <span style="color: #999;">(Premium 6Pts)</span></p>
+        </div>
+
+        <button id="confirm-to-pay" class="confirm-pay-button">Confirm to Pay</button>
+      </div>
+    </div>
+
+    <!-- PIN Modal -->
+    <div id="pin-modal" class="modal hidden">
+      <div class="modal-content pin-modal-content">
+        <h4>Input PIN to Pay</h4>
+        <p>Amount: <span id="pin-amount"></span></p>
+        <div class="pin-input">
+          <input type="password" id="pin-field" maxlength="4">
+          <!-- Eye icon toggler with SVG images -->
+          <span id="toggle-visibility" class="eye-icon">
+            <img src="assets/images/icons/eye.svg" id="eye-icon-img" alt="Toggle Visibility">
+          </span>
+        </div>
+        <button id="submit-pin">Submit</button>
+        <span id="pin-close-icon" class="cancel-icon">&times;</span>
+      </div>
+    </div>
+
+    <!-- NEW: Modal if no phone number is provided -->
+    <div id="no-number-modal" class="modal hidden">
+      <div class="modal-content">
+        <p>Please enter the recipient's 11-digit phone number.</p>
+        <button id="got-it-btn">Got It</button>
+      </div>
+    </div>
+
+    <!-- NEW: Insufficient Balance Modal -->
+    <div id="insufficient-balance-modal" class="modal hidden">
+      <div class="modal-content">
+        <p>Oops! Your wallet needs a little boost—fund wallet or enter a lower amount to continue.</p>
+        <button id="got-it-btn-insufficient">Got It</button>
+      </div>
+    </div>
+
+    <div class="more-services-container">
+      <p>More Services</p>
+      <a href="schedule.html" class="more-service-item">
+        <div class="icon">
+          <img src="assets/images/icons/schedule.svg" alt="Shedule Icon">
+        </div>
+        <div class="details">
+          <span>Schedule Services</span>
+          <p>Plan ahead—always stay connected.</p>
+        </div>
+        <div class="arrow">
+          <i class="chevron"></i>
+        </div>
+      </a>
+      <a href="airtime.html" class="more-service-item">
+        <div class="icon">
+          <img src="assets/images/icons/airtime.svg" alt="Airtime Icon">
+        </div>
+        <div class="details">
+          <span>Airtime</span>
+          <p>Up to ₦30 Cashback</p>
+        </div>
+        <div class="arrow">
+          <i class="chevron"></i>
+        </div>
+      </a>
+      <a href="betting.html" class="more-service-item">
+        <div class="icon">
+          <img src="assets/images/icons/football.svg" alt="Betting Icon">
+        </div>
+        <div class="details">
+          <span>Betting</span>
+          <p>10% Off</p>
+        </div>
+        <div class="arrow">
+          <i class="chevron"></i>
+        </div>
+      </a>
+      <a href="electricity.html" class="more-service-item">
+        <div class="icon">
+          <img src="assets/images/icons/electricity.svg" alt="Electricity Icon">
+        </div>
+        <div class="details">
+          <span>Electricity</span>
+          <p>₦30 Cashback</p>
+        </div>
+        <div class="arrow">
+          <i class="chevron"></i>
+        </div>
+      </a>
+      <a href="tv.html" class="more-service-item">
+        <div class="icon">
+          <img src="assets/images/icons/tv.svg" alt="TV Icon">
+        </div>
+        <div class="details">
+          <span>TV</span>
+          <p>6% Cashback</p>
+        </div>
+        <div class="arrow">
+          <i class="chevron"></i>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <!-- Loading JS -->
+  <script src="js/loading.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // ====== SELECTORS ======
+      const serviceProviderLogos = document.querySelectorAll(".service-provider-logo");
+      const tabs = document.querySelectorAll(".tab");
+      const offersGrid = document.getElementById("offers-grid");
+
+      // All modals
+      const confirmationModal = document.getElementById("cancel-modal");
+      const paymentModal = document.getElementById("payment-modal");
+      const pinModal = document.getElementById("pin-modal");
+      const noNumberModal = document.getElementById("no-number-modal");
+      const insufficientBalanceModal = document.getElementById("insufficient-balance-modal");
+
+      // Confirmation Modal buttons
+      const cancelBtn = document.getElementById("cancel-btn");
+      const continueBtn = document.getElementById("continue-btn");
+
+      // Payment Modal elements
+      const paymentCloseIcon = document.getElementById("payment-close-icon");
+      const confirmToPayButton = document.getElementById("confirm-to-pay");
+      const paymentTotal = document.getElementById("payment-total");
+      const paymentAmountEl = document.getElementById("payment-amount");
+      const billerNameEl = document.getElementById("biller-name");
+      const recipientNumberEl = document.getElementById("recipient-number");
+
+      // PIN Modal elements
+      const pinCloseIcon = document.getElementById("pin-close-icon");
+      const pinField = document.getElementById("pin-field");
+      const toggleVisibility = document.getElementById("toggle-visibility");
+      const eyeIconImg = document.getElementById("eye-icon-img");
+      const submitPinButton = document.getElementById("submit-pin");
+      const pinAmountEl = document.getElementById("pin-amount");
+
+      // "No number" modal
+      const gotItBtn = document.getElementById("got-it-btn");
+
+      // Insufficient balance modal
+      const gotItBtnInsufficient = document.getElementById("got-it-btn-insufficient");
+
+      // Other
+      const recipientPhoneInput = document.getElementById("recipient-phone");
+      const phoneErrorEl = document.getElementById("phone-error");
+
+      // State
+      let selectedNetwork = null;
+      let activeTab = "sme";
+      let pinAttempts = 3;
+      let currentModal = null;
+      let insufficientBalanceAttempts = 0; // Track # of times user sees insufficient balance
+
+      
+      const userBalance = 1200; //will use api later
+
+      //offer data
+      const offersData = {
+        airtel: {
+          sme: [
+            { label: "Airtel SME 1GB", price: "₦500",  cashback: "₦10 Cashback" },
+            { label: "Airtel SME 2GB", price: "₦1000", cashback: "₦20 Cashback" },
+            { label: "Airtel SME 3GB", price: "₦1500", cashback: "₦30 Cashback" },
+            { label: "Airtel SME 5GB", price: "₦2000", cashback: "₦50 Cashback" },
+            { label: "Airtel SME 10GB", price: "₦5000", cashback: "₦100 Cashback" },
+            { label: "Airtel SME 15GB", price: "₦7500", cashback: "₦150 Cashback" },
+            { label: "Airtel SME 20GB", price: "₦10000", cashback: "₦200 Cashback" },
+            { label: "Airtel SME 25GB", price: "₦12500", cashback: "₦250 Cashback" },
+            { label: "Airtel SME 30GB", price: "₦15000", cashback: "₦300 Cashback" },
+            { label: "Airtel SME 50GB", price: "₦25000", cashback: "₦500 Cashback" },
+            { label: "Airtel SME 75GB", price: "₦37500", cashback: "₦750 Cashback" },
+            { label: "Airtel SME 100GB", price: "₦50000", cashback: "₦1000 Cashback" }
+          ],
+          
+        },
+        // will add mtn, glo, 9mobile 
+      };
+
+      const tabsOrder = ["sme", "sme2", "cg", "gifting"];
+
+      // ====== HELPER FUNCTIONS ======
+
+      function showModal(modal) {
+        try {
+          modal.classList.add("show");
+          modal.classList.remove("hidden");
+          document.body.classList.add("modal-open");
+
+          if (modal === noNumberModal) {
+            document.body.classList.add("no-number-modal-open");
+          }
+          currentModal = modal;
+        } catch (e) {
+          console.error("Error showing modal:", e);
+        }
+      }
+
+      function closeModal(modal) {
+        try {
+          modal.classList.remove("show");
+          modal.classList.add("hidden");
+
+          if (modal === noNumberModal) {
+            document.body.classList.remove("no-number-modal-open");
+          }
+          // remove 'modal-open' if no other modals are active
+          document.body.classList.remove("modal-open");
+
+          if (currentModal === modal) {
+            currentModal = null;
+          }
+        } catch (e) {
+          console.error("Error closing modal:", e);
+        }
+      }
+
+      function openConfirmationModal(originModal) {
+        try {
+          showModal(confirmationModal);
+
+          cancelBtn.onclick = () => {
+            closeModal(confirmationModal);
+            closeModal(originModal);
+          };
+          continueBtn.onclick = () => {
+            closeModal(confirmationModal);
+            showModal(originModal);
+          };
+        } catch (e) {
+          console.error("Error opening confirmation modal:", e);
+        }
+      }
+
+      function isPhoneValid() {
+        const phoneVal = recipientPhoneInput.value.trim();
+        if (!selectedNetwork) {
+          return false;
+        }
+        if (phoneVal.length !== 11) {
+          return false;
+        }
+        return true;
+      }
+
+      // Validate phone input in real-time
+      recipientPhoneInput.addEventListener("input", () => {
+        const phoneVal = recipientPhoneInput.value.trim();
+
+        if (!selectedNetwork) {
+          phoneErrorEl.textContent = "Please select a network provider.";
+          recipientPhoneInput.classList.add("invalid");
+          return;
+        }
+
+        if (phoneVal.length < 11) {
+          phoneErrorEl.textContent = "Please enter a valid phone number.";
+          recipientPhoneInput.classList.add("invalid");
+        } else {
+          phoneErrorEl.textContent = "";
+          recipientPhoneInput.classList.remove("invalid");
+        }
+      });
+
+      // ====== LOAD OFFERS & TAB LOGIC ======
+
+      function loadOffers(direction = "none") {
+        if (!selectedNetwork) {
+          offersGrid.innerHTML = "<p>Please select a network provider.</p>";
+          return;
+        }
+
+        offersGrid.style.transition = "transform 0.3s ease";
+        offersGrid.style.transform = (direction === "left")
+          ? "translateX(-100%)"
+          : "translateX(100%)";
+
+        setTimeout(() => {
+          offersGrid.innerHTML = "";
+          const offers = offersData[selectedNetwork]?.[activeTab] || [];
+
+          offers.forEach((offer) => {
+            const offerCard = document.createElement("div");
+            offerCard.className = "offer-card";
+            offerCard.innerHTML = `
+              <p><strong>${offer.label}</strong></p>
+              <p>${offer.price}</p>
+            `;
+            // Clicking an offer -> check phone first
+            offerCard.addEventListener("click", () => {
+              showLoading(); // show loading while preparing the modal
+
+              // Simulate some async/processing delay (optional)
+              setTimeout(() => {
+                try {
+                  // Possibly connect to backend for final details
+
+                  if (!isPhoneValid()) {
+                    hideLoading();
+                    showModal(noNumberModal);
+                    return;
+                  }
+                  paymentTotal.textContent = offer.price;
+                  paymentAmountEl.textContent = offer.price;
+                  billerNameEl.textContent = selectedNetwork.toUpperCase();
+
+                  if (activeTab) {
+                    billerNameEl.textContent += ` (${activeTab.toUpperCase()})`;
+                  }
+                  recipientNumberEl.textContent = recipientPhoneInput.value.trim();
+                  pinAmountEl.textContent = offer.price;
+
+                  hideLoading();
+                  showModal(paymentModal);
+                } catch (err) {
+                  hideLoading();
+                  console.error("Error preparing Payment Modal:", err);
+                }
+              }, 600);
+            });
+
+            offersGrid.appendChild(offerCard);
+          });
+
+          // Slide in
+          offersGrid.style.transition = "none";
+          offersGrid.style.transform = (direction === "left")
+            ? "translateX(100%)"
+            : "translateX(-100%)";
+
+          setTimeout(() => {
+            offersGrid.style.transition = "transform 0.3s ease";
+            offersGrid.style.transform = "translateX(0)";
+          }, 50);
+        }, 300);
+      }
+
+      function handleTabChange(tabName) {
+        tabs.forEach((t) => t.classList.remove("active"));
+        const clickedTab = Array.from(tabs).find((t) => t.dataset.tab === tabName);
+        if (clickedTab) clickedTab.classList.add("active");
+
+        const currentIndex = tabsOrder.indexOf(activeTab);
+        const newIndex = tabsOrder.indexOf(tabName);
+        const direction = (currentIndex < newIndex) ? "left" : "right";
+
+        activeTab = tabName;
+        loadOffers(direction);
+      }
+
+      // Optional Swipe Logic
+      let isDragging = false;
+      let touchStartX = 0;
+      function handleSwipe(startX, endX) {
+        const deltaX = startX - endX;
+        const idx = tabsOrder.indexOf(activeTab);
+        if (Math.abs(deltaX) > 50) {
+          if (deltaX > 0 && idx < tabsOrder.length - 1) {
+            handleTabChange(tabsOrder[idx + 1]);
+          } else if (deltaX < 0 && idx > 0) {
+            handleTabChange(tabsOrder[idx - 1]);
+          }
+        }
+      }
+
+      offersGrid.addEventListener("touchstart", (e) => {
+        touchStartX = e.touches[0].pageX;
+        isDragging = true;
+      });
+      offersGrid.addEventListener("touchend", (e) => {
+        if (!isDragging) return;
+        const touchEndX = e.changedTouches[0].pageX;
+        handleSwipe(touchStartX, touchEndX);
+        isDragging = false;
+      });
+
+      // ====== EVENT LISTENERS ======
+      serviceProviderLogos.forEach((logo) => {
+        logo.addEventListener("click", () => {
+          serviceProviderLogos.forEach((l) => l.classList.remove("active"));
+          logo.classList.add("active");
+
+          selectedNetwork = logo.dataset.network;
+
+          if (recipientPhoneInput.classList.contains("invalid")) {
+            const phoneVal = recipientPhoneInput.value.trim();
+            if (phoneVal.length < 11) {
+              phoneErrorEl.textContent = "Please enter a valid phone number.";
+            } else {
+              phoneErrorEl.textContent = "";
+              recipientPhoneInput.classList.remove("invalid");
+            }
+          }
+          loadOffers();
+        });
+      });
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => handleTabChange(tab.dataset.tab));
+      });
+
+      paymentCloseIcon.addEventListener("click", () => {
+        openConfirmationModal(paymentModal);
+      });
+
+      confirmToPayButton.addEventListener("click", () => {
+        showLoading(); // Show loading while confirming payment
+        try {
+          const rawAmount = paymentTotal.textContent.replace(/[^\d.]/g, "");
+          const amountToPay = parseFloat(rawAmount) || 0;
+
+          if (amountToPay > userBalance) {
+            hideLoading();
+            closeModal(paymentModal);
+            showModal(insufficientBalanceModal);
+          } else {
+            hideLoading();
+            closeModal(paymentModal);
+            showModal(pinModal);
+          }
+        } catch (e) {
+          hideLoading();
+          console.error("Error on confirm to pay:", e);
+        }
+      });
+
+      pinCloseIcon.addEventListener("click", () => {
+        openConfirmationModal(pinModal);
+      });
+
+      // Toggle PIN visibility with eye/eye-slash icons
+      toggleVisibility.addEventListener("click", () => {
+        try {
+          if (pinField.type === "password") {
+            pinField.type = "text";
+            eyeIconImg.src = "assets/images/icons/eye-slash.svg";
+          } else {
+            pinField.type = "password";
+            eyeIconImg.src = "assets/images/icons/eye.svg";
+          }
+        } catch (e) {
+          console.error("Error toggling PIN visibility:", e);
+        }
+      });
+
+      submitPinButton.addEventListener("click", () => {
+        try {
+          const enteredPin = pinField.value.trim();
+          if (enteredPin === "1234") {
+            // Successful Payment
+            closeModal(pinModal);
+            pinField.value = "";
+            pinAttempts = 3;
+
+            // Grab the relevant data to pass to transactionStatus
+            const rawAmount = paymentTotal.textContent.replace(/[^\d.]/g, "");
+            const phoneVal = recipientPhoneInput.value.trim();
+            const currentMethod = "Wallet"; // or parse from sample-method if you have dynamic
+
+            // Navigate to your transaction status page with success status
+            window.location.href = `transactionStatus.html?status=success&amount=${rawAmount}&recipient=${phoneVal}&method=${currentMethod}`;
+          } else {
+            pinAttempts--;
+            if (pinAttempts > 0) {
+              alert(`Incorrect PIN. You have ${pinAttempts} attempt(s) left.`);
+            } else {
+              alert("3 failed attempts. Closing PIN Modal.");
+              closeModal(pinModal);
+              pinField.value = "";
+              pinAttempts = 3;
+            }
+          }
+        } catch (e) {
+          console.error("Error submitting PIN:", e);
+        }
+      });
+
+      gotItBtn.addEventListener("click", () => {
+        closeModal(noNumberModal);
+      });
+
+      // If user acknowledges insufficient balance
+      gotItBtnInsufficient.addEventListener("click", () => {
+        try {
+          insufficientBalanceAttempts++;
+
+          // Clear form & selection
+          recipientPhoneInput.value = "";
+          selectedNetwork = null;
+          serviceProviderLogos.forEach((l) => l.classList.remove("active"));
+
+          closeModal(insufficientBalanceModal);
+
+          // If user has hit "Got It" thrice, only then navigate to dashboard
+          if (insufficientBalanceAttempts === 3) {
+            window.location.href = "dashboard.html";
+          }
+        } catch (e) {
+          console.error("Error on insufficient balance modal button:", e);
+        }
+      });
+
+      // Initial load
+      loadOffers();
+    });
+  </script>
+</body>
+</html>

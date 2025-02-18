@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airtime to Cash</title>
+
+    <!-- Existing CSS Files -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/airtime2Cash.css">
+    <link rel="stylesheet" href="css/servicesComponents.css">
+    <!-- Loading CSS -->
+    <link rel="stylesheet" href="css/loading.css">
+</head>
+<body>
+<header>
+    <a href="dashboard.html" aria-label="Go back to dashboard">
+        <img src="assets/images/icons/back-icon.svg" alt="Back">
+    </a>
+    <p>Airtime to Cash</p>
+</header>
+
+<div class="main-container">
+    <!-- Promo Banner -->
+    <div class="promo-banner">
+      <div class="promo-content">
+        <img src="assets/images/mockups/hero_phone_mock.svg" alt="Security Shield" />
+        
+        <div class="text-content">
+          <h2>Privacy And Security+</h2>
+          <p>Trusted By Millions Of Users</p>
+          <button class="cta-button">Try now!</button>
+        </div>
+      </div>
+    </div>
+    
+
+    <!-- Info Section -->
+    <div class="info-section">
+        <p>Conversion Rates! MTN: 80%, Airtel: 70%, Glo: 60%, 9Mobile: 50%.</p>
+        <p>Example: Send ₦100 on MTN, receive ₦80.</p>
+    </div>
+
+    <h4>Select Your Service Provider</h4>
+    <div class="service-providers">
+        <img src="assets/images/icons/airtel-logo.svg" alt="Airtel" class="service-provider-logo" data-network="airtel">
+        <img src="assets/images/icons/mtn-logo.svg" alt="MTN" class="service-provider-logo" data-network="mtn">
+        <img src="assets/images/icons/glo-logo.svg" alt="Glo" class="service-provider-logo" data-network="glo">
+        <img src="assets/images/icons/9mobile-logo.svg" alt="9Mobile" class="service-provider-logo" data-network="9mobile">
+    </div>
+    <h2 style="color: var(--primary);"></h2>
+
+    <form id="airtime-form">
+        <label for="fixed-number">Send Airtime to This Number:</label>
+        <div class="output-field" >0812 333 1234</div>
+       
+        <label for="amount">Amount to Send:</label>
+        <input type="number" id="amount" min="100" placeholder="Minimum amount is ₦100" required>
+        <div class="error" id="amount-error">Minimum amount is ₦100</div>
+        <div class="error" id="network-error" style="display: none;">Please select a service provider.</div>
+
+        <label for="receive-amount">Amount You Will Receive:</label>
+        <div class="output-field" id="receive-amount">₦0</div>
+
+        <label for="phone-number">Phone:</label>
+        <input type="text" id="phone-number" placeholder="Enter your phone number" pattern="\d{11}" required>
+        <div class="error" id="phone-error">Phone number must be 11 digits.</div>
+
+        <label for="account-number">Account Number:</label>
+        <input type="text" id="account-number" placeholder="Enter your account number" pattern="\d{10}" required>
+        <div class="error" id="account-error">Account number must be 10 digits.</div>
+
+        <label for="account-name">Account Name:</label>
+        <input type="text" id="account-name" placeholder="Enter the account name" required>
+
+        <label for="screenshot">Upload Screenshot (Max 5MB):</label>
+        <div class="custom-file-upload">
+            <span id="file-name">Drop file or click <span class="upload-link"  style="color: #146EF5; text-decoration: underline;">here</span> to upload</span>
+            <input type="file" id="screenshot" class="file-input" accept="image/*" required>
+        </div>
+        
+        <div class="error" id="screenshot-error" style="display: none;"></div>
+        
+        <button type="submit">Submit</button>
+    </form>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Form Submitted Successfully!</h3>
+            <p>Your airtime to cash request has been processed.</p>
+            <div class="modal-buttons">
+                <button id="done-btn">Done</button>
+                <button id="convert-again-btn">Convert Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div id="error-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Submission Failed</h3>
+            <p id="error-modal-message">There was an issue processing your request. Please try again.</p>
+            <div class="modal-buttons">
+                <button id="try-again-btn">Try Again</button>
+                <button id="got-it-btn" style="display: none;">Got It</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loader Container -->
+    <div id="loader-container"></div>
+</div>
+<!-- JS Files -->
+<script src="js/loading.js" defer></script>
+<script src="js/airtime2Cash.js" defer></script>
+</body>
+</html>

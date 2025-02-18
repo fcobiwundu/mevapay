@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Transaction Status</title>
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/servicesComponents.css">
+  <link rel="stylesheet" href="css/loading.css">
+
+  <style>
+
+    .status-page {
+      text-align: center;
+    }
+
+    .status-icon {
+      width: 40px;
+      height: 40px;
+      margin: 3.50rem auto 0;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+    }
+    .status-icon.success {
+      background-image: url("assets/images/icons/success-check.svg");
+    }
+    .status-icon.pending {
+      background-image: url("assets/images/icons/pending-clock.svg");
+    }
+    .status-icon.failed {
+      background-image: url("assets/images/icons/failed-cross.svg");
+    }
+
+    .status-text {
+      font-size: 1.2rem;
+      margin-bottom: 0rem;
+      font-weight: 600;
+    }
+    .status-text.success {
+      color: var(--primary); 
+    }
+    .status-text.pending {
+      color: #ff9800;
+    }
+    .status-text.failed {
+      color: #dc3545;
+    }
+
+    .amount {
+      font-size: 2rem;
+      font-weight: bold;
+      margin: 0;
+      color: #444;
+    }
+
+    .transaction-info {
+      margin: 1rem 0;
+      font-size: 0.95rem;
+      color: #666;
+      line-height: 1.5;
+    }
+    .transaction-line {
+      display: flex;
+      justify-items: center;
+      justify-content: space-between;
+    }
+    .transaction-info strong {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .receipt-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 1.5rem 0;
+      font-size: 0.95rem;
+    }
+    .receipt-links a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .receipt-links a:hover {
+      text-decoration: underline;
+    }
+
+
+    .rewards-section {
+      background-color: var(--light-blue-accent);
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: left;
+      margin-bottom: 1.5rem;
+      margin-top: 2rem;
+    }
+    .rewards-section h5 {
+      margin: 0 0 1rem;
+      color: #333;
+    }
+    .reward-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0.5rem 0;
+    }
+    .reward-item p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #333;
+    }
+    .grab-btn {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 0.4rem 0.8rem;
+      cursor: pointer;
+    }
+    .grab-btn:hover {
+      color: var(--primary);
+      background-color: #fff;
+      border: 1px solid var(--primary);
+    }
+
+    .footer-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .footer-buttons button {
+      width: 30%;
+      padding: 13px;
+      font-size: 1rem;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+    }
+
+    #retry-btn, #done-btn {
+      background-color: var(--light-blue-accent);
+      color: #333;
+    }
+    #retry-btn:hover, #done-btn:hover {
+      color: var(--primary);
+      background-color: #fff;
+      border: 1px solid var(--primary);
+    }
+
+    /* If success, style #buy-again-btn differently. */
+    .success #buy-again-btn {
+      background-color: var(--primary);
+      color: #fff;
+      border: none;
+    }
+    .success #buy-again-btn:hover {
+      color: var(--primary);
+      background-color: #fff;
+      border: 1px solid var(--primary);
+    }
+
+    /* If pending, might rename or hide certain elements. */
+    .pending #buy-again-btn {
+      display: none;
+    }
+
+    /* If failed, show a "Retry" button instead of "Buy Again". */
+    .failed #buy-again-btn {
+      display: none;
+    }
+
+    @media(max-width: 530px){
+      .footer-buttons button {
+        width: 200px;
+      }
+    }
+    @media(max-width: 360px){
+      .footer-buttons {
+        gap: 10px;
+      }
+      .footer-buttons button {
+        padding: 10px;
+      }
+    }
+    @media(max-width: 341px){
+      .footer-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="main-container status-page" id="status-page" style="margin-top: 1rem; margin-bottom: 1rem">
+    <!-- Dynamic icon -->
+    <div class="status-icon" id="status-icon"> </div>
+
+    <!-- Dynamic text: success/pending/failed -->
+    <p class="status-text" id="status-text">Unknown</p>
+
+    <!-- Amount -->
+    <h2 id="transaction-amount" class="amount">₦0.00</h2>
+
+    <!-- Info: recipient, method -->
+    <div class="transaction-info">
+      <p class="transaction-line">
+        <span>Recipient:</span>
+        <strong id="transaction-recipient">N/A</strong>
+      </p>
+      <p class="transaction-line">
+        <span>Payment Method:</span>
+        <strong id="transaction-method">N/A</strong>
+      </p>
+    </div>
+
+    <!-- Links to share/view receipt -->
+    <div class="receipt-links">
+      <a href="#" id="share-receipt-link">View Receipt &gt;</a>
+    </div>
+
+    <!-- Rewards only if success -->
+    <div class="rewards-section" id="rewards-section">
+      <h4>Grab Your Rewards!</h5>
+      <div class="reward-item">
+        <p>8 MevaPoints<br><small>Click to grab your MevaPoints now.</small></p>
+        <button class="grab-btn">Grab</button>
+      </div>
+      <div class="reward-item">
+        <p>₦200 Data Coupon<br><small>Available for Data Top-up</small></p>
+        <button class="grab-btn">Grab</button>
+      </div>
+      <div class="reward-item">
+        <p>₦100 Betting Coupon<br><small>For your next Betting Deposit</small></p>
+        <button class="grab-btn">Grab</button>
+      </div>
+    </div>
+
+    <!-- Footer Buttons -->
+    <div class="footer-buttons">
+      <button id="done-btn">Done</button>
+      <button id="retry-btn" style="display:none;">Retry</button>
+      <button id="buy-again-btn">Buy Again</button>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="js/loading.js"></script> <!-- If needed -->
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      try {
+        // Parse query params
+        const params = new URLSearchParams(window.location.search);
+
+        // Fallback defaults
+        let txStatus = params.get("status") || "Unknown";
+        let amount = params.get("amount") || "0.00";
+        let recipient = params.get("recipient") || "N/A";
+        let payMethod = params.get("method") || "N/A";
+
+        // Gracefully handle the source param to avoid "null"
+        const rawSource = params.get("source");
+        let sourcePage = (rawSource && rawSource !== "null")
+          ? rawSource
+          : "data.html";
+
+        // DOM elements
+        const statusPage = document.getElementById("status-page");
+        const statusIcon = document.getElementById("status-icon");
+        const statusTextEl = document.getElementById("status-text");
+        const transactionAmountEl = document.getElementById("transaction-amount");
+        const transactionRecipientEl = document.getElementById("transaction-recipient");
+        const transactionMethodEl = document.getElementById("transaction-method");
+
+        const rewardsSection = document.getElementById("rewards-section");
+        const buyAgainBtn = document.getElementById("buy-again-btn");
+        const retryBtn = document.getElementById("retry-btn");
+        const doneBtn = document.getElementById("done-btn");
+
+        // Fill in transaction details
+        transactionAmountEl.textContent = `₦${amount}`;
+        transactionRecipientEl.textContent = recipient;
+        transactionMethodEl.textContent = payMethod;
+
+        // Check txStatus
+        if (txStatus === "success") {
+          statusPage.classList.add("success");
+          statusIcon.classList.add("success");
+          statusTextEl.classList.add("success");
+          statusTextEl.textContent = "Successful";
+          rewardsSection.style.display = "block";
+          buyAgainBtn.style.display = "inline-block";
+          retryBtn.style.display = "none";
+
+        } else if (txStatus === "pending") {
+          statusPage.classList.add("pending");
+          statusIcon.classList.add("pending");
+          statusTextEl.classList.add("pending");
+          statusTextEl.textContent = "Pending";
+          rewardsSection.style.display = "none";
+          buyAgainBtn.style.display = "none";
+          retryBtn.style.display = "none";
+          doneBtn.textContent = "Okay";
+          doneBtn.style.backgroundColor = "var(--primary)";
+          doneBtn.style.color = "#fff";
+
+          doneBtn.addEventListener("mouseover", function () {
+            doneBtn.style.color = "var(--primary)";
+            doneBtn.style.backgroundColor = "#fff";
+            doneBtn.style.border = "1px solid var(--primary)";
+          });
+          doneBtn.addEventListener("mouseout", function () {
+            doneBtn.style.backgroundColor = "var(--primary)";
+            doneBtn.style.color = "#fff";
+            doneBtn.style.border = "none";
+          });
+
+        } else if (txStatus === "failed") {
+          statusPage.classList.add("failed");
+          statusIcon.classList.add("failed");
+          statusTextEl.classList.add("failed");
+          statusTextEl.textContent = "Failed";
+          rewardsSection.style.display = "none";
+          buyAgainBtn.style.display = "none";
+          retryBtn.style.display = "inline-block";
+          doneBtn.textContent = "Close";
+
+          retryBtn.style.backgroundColor = "var(--primary)";
+          retryBtn.style.color = "#fff";
+          retryBtn.addEventListener("mouseover", function () {
+            retryBtn.style.color = "var(--primary)";
+            retryBtn.style.backgroundColor = "#fff";
+            retryBtn.style.border = "1px solid var(--primary)";
+          });
+          retryBtn.addEventListener("mouseout", function () {
+            retryBtn.style.backgroundColor = "var(--primary)";
+            retryBtn.style.color = "#fff";
+            retryBtn.style.border = "none";
+          });
+
+        } else {
+          // Unknown
+          statusTextEl.textContent = "Unknown";
+          rewardsSection.style.display = "none";
+        }
+
+        // Button logic
+        buyAgainBtn.addEventListener("click", () => {
+          try {
+            window.location.href = sourcePage;
+          } catch (err) {
+            console.error("Error navigating to " + sourcePage, err);
+          }
+        });
+
+        retryBtn.addEventListener("click", () => {
+          try {
+            alert("Retry logic here—going back or re-initiating transaction.");
+            window.location.href = sourcePage;
+          } catch (err) {
+            console.error("Error on retry:", err);
+          }
+        });
+
+        doneBtn.addEventListener("click", () => {
+          try {
+            window.location.href = "dashboard.html";
+          } catch (err) {
+            console.error("Error navigating to dashboard:", err);
+          }
+        });
+
+        // Share receipt
+        const shareReceiptLink = document.getElementById("share-receipt-link");
+        shareReceiptLink.addEventListener("click", (e) => {
+          e.preventDefault();
+          alert("Share Receipt clicked (placeholder)!");
+        });
+
+        // Optional View Details
+        const viewDetailsLink = document.getElementById("view-details-link");
+        if (viewDetailsLink) {
+          viewDetailsLink.addEventListener("click", (e) => {
+            e.preventDefault();
+            alert("View Details clicked (placeholder)!");
+          });
+        }
+
+      } catch (error) {
+        console.error("Error initializing transaction status page:", error);
+      }
+    });
+  </script>
+</body>
+</html>

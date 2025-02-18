@@ -3,38 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mevapay - Login</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+
+    <meta name="description" content="Create a Mevapay account to enjoy fast, smart, and reliable solutions for airtime, data, electricity bill payments, and more. Join thousands in Nigeria using Mevapay.">
+    <meta name="keywords" content="Mevapay signup, Create account, Payment services in Nigeria, Airtime top-up, Data bundles, Utility payments">
+    
+    <meta property="og:title" content="Mevapay Signup">
+    <meta property="og:description" content="Sign up for Mevapay to access secure and seamless payment solutions for airtime, data, and utility bills. Fast, smart, and reliable.">
+    <meta property="og:image" content="https://www.mevapay.com.ng/assets/images/logos/og-image.jpg">
+    <meta property="og:url" content="https://www.mevapay.com.ng/signup">
+    <meta property="og:type" content="website">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mevapay Signup">
+    <meta name="twitter:description" content="Join Mevapay today for fast and reliable payment solutions. Simplify your airtime, data, and utility bill payments.">
+    <meta name="twitter:image" content="https://www.mevapay.com.ng/assets/images/logos/twitter-card.jpg">
+    <link rel="canonical" href="https://www.mevapay.com.ng/signup">
+
+    <link rel="icon" type="image/x-icon" href="/assets/images/logos/favicon.ico" />
+    <link rel="icon" type="image/png" href="/assets/images/logos/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/assets/images/logos/favicon.svg" />
+    <link rel="shortcut icon" href="/assets/images/logos/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/logos/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Mevapay Signup" />
+
+    <title>Mevapay - Signup</title>
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
 <header class="sticky-header">
     <div class="header-container">
         <div class="logo">
-            <img src="resources/images/logo.svg" alt="Mevapay Logo" >
+            <a href="index.html" class="btn">
+                <img src="assets/images/logos/logo-full.svg" alt="Mevapay Logo">
+            </a>
         </div>
     </div>
 </header>
 <main class="auth-container">
     <form id="signup-form">
         <h2>Create Your Account</h2>
-        <label for="full-name">Full Name</label>
-        <input type="text" id="full-name" name="full-name" placeholder="Enter Your Full Name" required>
+        <p>Sign up to start using Mevapay.</p>
+        <label for="first-name">First Name</label>
+        <input type="text" id="first-name" name="first-name" placeholder="Enter Your first Name" required>
+        <label for="last-name">Last Name</label>
+        <input type="text" id="last-name" name="last-name" placeholder="Enter Your last Name" required>
         <label for="mobile-number">Mobile Number</label>
         <input type="text" id="mobile-number" name="mobile-number" placeholder="Enter Your Mobile Number" required>
         <label for="email">Email</label>
         <input type="email" id="email" name="email" placeholder="Enter Your Email" required>
         <label for="username">Username</label>
         <input type="text" id="username" name="username" placeholder="Enter Username" required>
+
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Enter Password" required>
+        <div class="password-container">
+            <input type="password" id="password" name="password"  autocomplete="new-password" placeholder="Enter your password" required>
+            <img src="assets/images/icons/eye.svg" alt="Show Password" class="toggle-password"
+                 onclick="togglePasswordVisibility('password', this)">
+        </div>
+
         <label for="confirm-password">Confirm Password</label>
-        <input type="password" id="confirm-password" name="confirm-password" placeholder="Retype Password" required>
-        <button type="submit" class="auth-btn">Register</button>
+        <div class="password-container">
+            <input type="password" id="confirm-password" name="confirm-password" placeholder="Retype your password" required>
+            <img src="assets/images/icons/eye.svg" alt="Show Password" class="toggle-password"
+                 onclick="togglePasswordVisibility('confirm-password', this)">
+        </div>
+
+        <button type="submit" class="auth-btn">Sigu up</button>
         <p>Already have an account? <a href="login.html">Login</a></p>
     </form>
 </main>
-<script src="script.js"></script>
+
+<script src="js/auth.js"></script>
 </body>
 </html>
 

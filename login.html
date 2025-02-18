@@ -3,19 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Login to your Mevapay account to access fast, smart, and reliable payment services for airtime, data, electricity bill payments, and more.">
+    <meta name="keywords" content="Mevapay login, Account login, Payment services in Nigeria, Airtime top-up, Data bundles, Utility payments">
+    
+    <meta property="og:title" content="Mevapay Login">
+    <meta property="og:description" content="Access your Mevapay account to manage payments for airtime, data, electricity bills, and more. Fast, secure, and reliable.">
+    <meta property="og:image" content="https://www.mevapay.com.ng/assets/images/logos/og-image.jpg">
+    <meta property="og:url" content="https://www.mevapay.com.ng/login">
+    <meta property="og:type" content="website">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mevapay Login">
+    <meta name="twitter:description" content="Log in to your Mevapay account for secure and seamless payment solutions. Airtime, data, and utility bills made easy.">
+    <meta name="twitter:image" content="https://www.mevapay.com.ng/assets/images/logos/twitter-card.jpg">
+    <link rel="canonical" href="https://www.mevapay.com.ng/login">
+
+    <link rel="icon" type="image/x-icon" href="/assets/images/logos/favicon.ico" />
+    <link rel="icon" type="image/png" href="/assets/images/logos/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/assets/images/logos/favicon.svg" />
+    <link rel="shortcut icon" href="/assets/images/logos/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/logos/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Mevapay Login" />
+
     <title>Mevapay - Login</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
 <header class="sticky-header">
     <div class="header-container">
         <div class="logo">
-            <img src="resources/images/logo.svg" alt="Mevapay Logo" >
+            <a href="index.html" class="btn">
+                <img src="assets/images/logos/logo-full.svg" alt="Mevapay Logo">
+            </a>
         </div>
     </div>
 </header>
-
 <main class="auth-container">
     <form id="login-form">
         <h2>Welcome Back!</h2>
@@ -23,12 +48,22 @@
         <label for="username">Username</label>
         <input type="text" id="username" name="username" placeholder="Enter Username" required>
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Enter Password" required>
+        <div class="password-container">
+            <input type="password" id="password" name="password"  autocomplete="new-password" placeholder="Enter your password" required>
+            <img src="assets/images/icons/eye.svg" alt="Show Password" class="toggle-password"
+                 onclick="togglePasswordVisibility('password', this)">
+        </div>
+
+    
+
         <button type="submit" class="auth-btn">Login</button>
         <p><a href="#">Forgot your password?</a></p>
         <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
     </form>
+    </form>
 </main>
-<script src="script.js"></script>
+
+<script src="js/auth.js"></script>
 </body>
 </html>
+

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mevapay QR Code Generator</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      background-color: #f4f4f4;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      text-align: center;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    #qrContainer {
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Download Mevapay QR Code</h1>
+    <div id="qrContainer"></div>
+    <button id="download-btn">Download QR Code</button>
+  </div>
+
+  <!-- Include the QRCode.js library from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set your website URL – include the protocol for a valid link.
+      const websiteURL = "https://www.mevapay.com.ng"; 
+      const qrSize = 500; // Dimensions (in pixels) for the QR code
+      const qrContainer = document.getElementById("qrContainer");
+
+      // Generate the QR code using QRCode.js with high error correction.
+      const qrCode = new QRCode(qrContainer, {
+        text: websiteURL,
+        width: qrSize,
+        height: qrSize,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+
+      // Wait briefly for the QR code to render, then overlay your logo.
+      setTimeout(function() {
+        // The QRCode.js library may render an <img> or <canvas>.
+        let qrElement = qrContainer.querySelector("img") || qrContainer.querySelector("canvas");
+
+        // Create a new canvas to combine the QR code with your logo.
+        const canvas = document.createElement("canvas");
+        canvas.width = qrSize;
+        canvas.height = qrSize;
+        const ctx = canvas.getContext("2d");
+
+        // Draw the generated QR code onto the new canvas.
+        ctx.drawImage(qrElement, 0, 0, qrSize, qrSize);
+
+        // Load your custom logo.
+        const logo = new Image();
+        logo.src = "assets/images/logos/logo-icon.svg"; // Update this path as needed.
+        logo.onload = function() {
+          // Use the logo's natural dimensions.
+          const logoWidth = logo.naturalWidth;
+          const logoHeight = logo.naturalHeight;
+
+          // Calculate the top-left coordinates to center the logo.
+          const logoX = (qrSize - logoWidth) / 2;
+          const logoY = (qrSize - logoHeight) / 2;
+          
+          // (Optional) Draw a white circular background behind the logo for better contrast.
+          // Adjust the radius if needed.
+          const radius = Math.max(logoWidth, logoHeight) / 2 + 25;
+          ctx.fillStyle = "#fff";
+          ctx.beginPath();
+          ctx.arc(qrSize / 2, qrSize / 2, radius, 0, Math.PI * 2, false);
+          ctx.fill();
+          
+          // Draw the logo using its intrinsic dimensions.
+          ctx.drawImage(logo, logoX, logoY, logoWidth, logoHeight);
+        };
+
+        // Replace the QR code container's contents with the new combined canvas.
+        qrContainer.innerHTML = "";
+        qrContainer.appendChild(canvas);
+
+        // Set up the download button to allow users to download the QR code as a PNG.
+        document.getElementById("download-btn").addEventListener("click", function() {
+          const link = document.createElement("a");
+          link.download = "Mevapay_QR_Code.png";
+          link.href = canvas.toDataURL("image/png");
+          link.click();
+        });
+      }, 500); // Adjust timeout if necessary.
+    });
+  </script>
+</body>
+</html>

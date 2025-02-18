@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Mevapay Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description" content="Mevapay offers fast, smart, and reliable solutions for airtime, data, electricity bill payments, and more. Secure, seamless, and trusted by thousands in Nigeria.">
+    <meta name="keywords" content="Payment services in Nigeria, Airtime top-up, Data bundles, Utility payment platform">
+    
+    <meta property="og:title" content="Mevapay - Fast, Smart, Reliable Payment Services in Nigeria">
+    <meta property="og:description" content="Secure and seamless solutions for airtime, data, electricity bills, and more. Trusted by thousands in Nigeria.">
+    <meta property="og:image" content="https://www.mevapay.com.ng/assets/images/logos/og-image.jpg">
+    <meta property="og:url" content="https://www.mevapay.com.ng">
+    <meta property="og:type" content="website">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mevapay - Fast, Smart, Reliable Payment Services in Nigeria">
+    <meta name="twitter:description" content="Simplify your payments with Mevapay. Airtime, data, electricity bills, and more at your fingertips.">
+    <meta name="twitter:image" content="https://www.mevapay.com.ng/assets/images/logos/twitter-card.jpg">
+    
+    <link rel="canonical" href="https://www.mevapay.com.ng">
+    
+    <link rel="icon" type="image/x-icon" href="/assets/images/logos/favicon.ico">
+    <link rel="icon" type="image/png" href="/assets/images/logos/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="/assets/images/logos/favicon.svg">
+    <link rel="shortcut icon" href="/assets/images/logos/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/logos/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-title" content="Mevapay">
+
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    
+</head>
+<body>
+    
+<header>
+    <!-- Burger Menu (visible on mobile only) -->
+    <div class="burger-menu" id="burger-menu">
+        <img src="assets/images/icons/burger-menu.svg">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <h1 class="logo"></h1>
+    <div class="header-icons">
+        <i class="notification-icon">
+            <img src="assets/images/icons/notification-icon.svg" alt="Notification Icon">
+        </i>
+        
+        <div class="profile-avatar">
+            <img src="assets/images/icons/profile.svg" alt="User Avatar">
+        </div>
+    </div>
+</header>
+
+<!-- Welcome Modal -->
+<div id="welcomeModal" class="modal">
+    <div class="modal-content">
+        <h4 id="welcomeText"></h4>
+        <p>We hope you have a great time!</p>
+        <button id="gotItBtn">Got it</button>
+    </div>
+</div>
+
+<nav class="sidebar" id="sidebar">
+
+    <div class="sidebar-top-wrapper">
+        <!-- Logo + Expand Button -->
+        <div class="sidebar-top">
+            <!-- Full Logo (desktop & mobile) or Icon Logo (tablet) -->
+            <a href="dashboard.html" class="logo_wrapper">
+                <img src="assets/images/logos/logo-full.svg" alt="Logo" class="sidebar-logo" />
+            </a>
+
+            <!-- Expand Button (desktop only) -->
+            <div class="expand-btn" id="expand-btn">
+                <img src="assets/images/icons/back-icon.svg" alt="Expand/Collapse" />
+            </div>
+        </div>
+
+        <!--            &lt;!&ndash; Search Section &ndash;&gt;-->
+        <!--            <div class="search_wrapper">-->
+        <!--                <img src="path/to/search-icon.png" alt="Search" class="search-icon" />-->
+        <!--                <input type="search" placeholder="Search for anything..." />-->
+        <!--            </div>-->
+
+        <!-- Main Links -->
+        <div class="sidebar-links">
+            <h2>Main</h2>
+            <ul>
+                <li>
+                    <a href="dashboard.html" title="Dahboard" class="tooltip">
+                        <img src="assets/images/icons/home.svg" alt="Dashboard" />
+                        <!--
+                             The .hide class is toggled when collapsed.
+                             The tooltip_content shows on hover if collapsed.
+                         -->
+                        <span class="link hide">Dashboard</span>
+                        <span class="tooltip_content">Dashboard</span>
+                    </a>
+                </li>
+        
+                <!-- Dropdown Menu for Deposit Wallet -->
+                <li class="menu-item dropdown">
+                    <a href="#" class="tooltip dropdown-toggle">
+                        <img src="assets/images/icons/deposit.svg" alt="Deposit Wallet" />
+                        <span class="link hide">Fund Wallet</span>
+                        <span class="tooltip_content">Fund Wallet</span>
+                        <i class="chevron"></i> <!-- Chevron icon -->
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="automatedFunding.html">Automated Funding</a></li>
+                        <li><a href="cardFundung.html">Card Funding</a></li>
+                        <li><a href="manualFunding.html">Manual Funding</a></li>
+                    </ul>
+                </li>
+            <h2>Services</h2>
+                <li>
+                    <a href="data.html" title="Data" class="tooltip">
+                        <img src="assets/images/icons/data.svg" alt="Buy Data" />
+                        <!--
+                             The .hide class is toggled when collapsed.
+                             The tooltip_content shows on hover if collapsed.
+                         -->
+                        <span class="link hide">Data</span>
+                        <span class="tooltip_content">Data</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="airtime.html" title="Airtime" class="tooltip">
+                        <img src="assets/images/icons/airtime.svg" alt="Buy Airtime" />
+                        <!--
+                             The .hide class is toggled when collapsed.
+                             The tooltip_content shows on hover if collapsed.
+                         -->
+                        <span class="link hide">Airtime</span>
+                        <span class="tooltip_content">Airtime</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="mevaGift.html" title="Meva Gift" class="tooltip">
+                        <img src="assets/images/icons/meva-gift.svg" alt="Meva Gift" />
+                        <!--
+                             The .hide class is toggled when collapsed.
+                             The tooltip_content shows on hover if collapsed.
+                         -->
+                        <span class="link hide">Meva Gift</span>
+                        <span class="tooltip_content">Meva Gift</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="betting.html" title="Betting" class="tooltip">
+                        <img src="assets/images/icons/football.svg" alt="Betting" />
+                        <!--
+                             The .hide class is toggled when collapsed.
+                             The tooltip_content shows on hover if collapsed.
+                         -->
+                        <span class="link hide">Betting</span>
+                        <span class="tooltip_content">Betting</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="airtime2Cash.html" title="Airtime2Cash" class="tooltip">
+                        <img src="assets/images/icons/airtime-to-cash.svg" alt="Airtime2Cash" />
+                        <!--
+                             The .hide class is toggled when collapsed.
+                             The tooltip_content shows on hover if collapsed.
+                         -->
+                        <span class="link hide">Airtime2Cash</span>
+                        <span class="tooltip_content">Airtime2Cash</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="education.html" title="Education" class="tooltip">
+                        <img src="assets/images/icons/education.svg" alt="Education" />
+                        <!--
+                             The .hide class is toggled when collapsed.
+                             The tooltip_content shows on hover if collapsed.
+                         -->
+                        <span class="link hide">Education</span>
+                        <span class="tooltip_content">Education</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="electricity.html" title="Electricity" class="tooltip">
+                        <img src="assets/images/icons/electricity.svg" alt="Electricity" />
+                        <!--
+                             The .hide class is toggled when collapsed.
+                             The tooltip_content shows on hover if collapsed.
+                         -->
+                        <span class="link hide">Electricity</span>
+                        <span class="tooltip_content">Electricity</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="tv.html" title="Tv" class="tooltip">
+                        <img src="assets/images/icons/tv.svg" alt="Tv" />
+                        <!--
+                             The .hide class is toggled when collapsed.
+                             The tooltip_content shows on hover if collapsed.
+                         -->
+                        <span class="link hide">Tv</span>
+                        <span class="tooltip_content">TV</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="refer&Earn.html" title="Refer&Earn" class="tooltip">
+                        <img src="assets/images/icons/money-bag.svg" alt="Refer&Earn" />
+                        <!--
+                             The .hide class is toggled when collapsed.
+                             The tooltip_content shows on hover if collapsed.
+                         -->
+                        <span class="link hide">Refer&Earn</span>
+                        <span class="tooltip_content">Refer&Earn</span>
+                    </a>
+                </li>
+              
+            </ul>
+        </div>
+
+        <!-- Sidebar Action -->
+        <!--            <div class="sidebar_action_wrapper">-->
+        <!--                <div class="sidebar_action">-->
+        <!--                    <div class="progress-bar">-->
+        <!--                        <div class="progress_bar_value">60%</div>-->
+        <!--                    </div>-->
+        <!--                    <h2>Used Capacity</h2>-->
+        <!--                    <p>You are already using 60% of your capacity.</p>-->
+        <!--                    <button>Upgrade plan</button>-->
+        <!--                </div>-->
+        <!--            </div>-->
+    </div>
+
+    <!-- Bottom Links -->
+    <div class="sidebar-links bottom-links">
+        <ul>
+            <li>
+                <a href="#settings" title="Settings" class="tooltip">
+                    <img src="path/to/settings-icon.png" alt="Settings" />
+                    <span class="link hide">Settings</span>
+                    <span class="tooltip_content">Settings</span>
+                </a>
+            </li>
+            <li>
+                <a href="#help" title="Help" class="tooltip">
+                    <img src="path/to/help-icon.png" alt="Help" />
+                    <span class="link hide">Help</span>
+                    <span class="tooltip_content">Help</span>
+                </a>
+            </li>
+        </ul>
+
+
+        <!-- Profile Section -->
+        <!-- <div class="sidebar_profile"> -->
+            <!--                <div class="avatar_wrapper">-->
+            <!--                    <img class="avatar" src="path/to/profile.png" alt="Profile Picture" />-->
+            <!--                    <div class="online_status"></div>-->
+            <!--                </div>-->
+            <!--                <section class="avatar_name hide">-->
+            <!--                    <div class="user-name">Joe Doe</div>-->
+            <!--                    <div class="email">joe.doe@atheros.ai</div>-->
+            <!--                </section>-->
+            <!-- <a href="#logout" class="logout">
+                <img src="path/to/logout-icon.png" alt="Logout" />
+                <span class="link hide">Logout</span>
+            </a> -->
+        </div>
+    </div>
+</nav>
+<!-- CONTENT WRAPPER -->
+<div class="content-wrapper">
+
+    <!-- MAIN AREA (3 columns + your reorder logic) -->
+    <main>
+        <div class="layout-container" id="dashboard-container">
+            <!-- COLUMN 1 -->
+            <div class="column" id="column-1">
+                <section class="balance-section" id="balance-section">
+                    <div class="balance-card">
+                        <div class="available-text">
+                            <p>Available Balance</p>
+                            <img src="assets/images/icons/eye-slash.svg" alt="Toggle Balance" class="toggle-visibility"
+                                onclick="toggleBalanceVisibility('balance-text', this)">
+                        </div>
+                        <div class="balance-container">
+                            <h2 id="balance-text">₦18,000.00</h2>
+                            <a href="fundWallet.html" aria-label="Fund Wallet">
+                                <button class="add-money"><strong>+</strong> Fund Wallet</button>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Quick Actions, Services, etc. -->
+                <!-- QUICK ACTIONS -->
+                <!-- <section class="quick-actions" id="quick-actions-section">
+                    <h2>Quick Actions</h2>
+                    <div class="actions"> -->
+                        <!-- Action Item #1 -->
+                        <!-- <div class="action-item">
+                            <button class="circle-btn">
+                                <img src="path/to/arrow-icon.png" alt="Arrow Icon">
+                            </button>
+                            <p class="label">Transfer</p>
+                        </div> -->
+                        <!-- More Action Items -->
+                        <!-- <div class="action-item">
+                            <button class="circle-btn">
+                                <img src="path/to/arrow-icon.png" alt="Arrow Icon">
+                            </button>
+                            <p class="label">Transfer</p>
+                        </div>
+                        <div class="action-item">
+                            <button class="circle-btn">
+                                <img src="path/to/arrow-icon.png" alt="Arrow Icon">
+                            </button>
+                            <p class="label">Transfer</p>
+                        </div>
+                        <div class="action-item">
+                            <button class="circle-btn">
+                                <img src="path/to/arrow-icon.png" alt="Arrow Icon">
+                            </button>
+                            <p class="label">Transfer</p>
+                        </div>
+                    </div>
+                </section> -->
+
+                <!-- SERVICES BLOCK -->
+                <section class="services-block" id="services-section">
+                    <h2>Services</h2>
+
+                    <div class="services">
+
+                      <!-- Service Item #1 -->
+                       <a href="data.html">
+                            <div class="service-item">
+                                <button class="service-circle-btn">
+                                    <img src="assets/images/icons/data.svg" alt="Data">
+                                </button>
+                                <p class="label">Data</p>
+                            </div>
+                       </a>
+                      
+
+                      <!-- Service Item #2 -->
+                       <a href="airtime.html">
+                            <div class="service-item">
+                                <button class="service-circle-btn">
+                                    <img src="assets/images/icons/airtime.svg" alt="Airtime">
+                                </button>
+                                <p class="label">Airtime</p>
+                            </div>
+                       </a>
+                      
+                      <!-- Service Item #3 -->
+                      <div class="service-item">
+                        <button class="service-circle-btn">
+                          <img src="assets/images/icons/meva-gift.svg" alt="Meva Gift">
+                          <!-- <span class="new-badge">NEW</span> -->
+                        </button>
+                        <p class="label">Meva Gift</p>
+                      </div>
+
+                      <!-- Service Item #4 -->
+                      <div class="service-item">
+                        <button class="service-circle-btn">
+                          <img src="assets/images/icons/football.svg" alt="Betting">
+                        </button>
+                        <p class="label">Betting</p>
+                      </div>
+                    
+                      <!-- Service Item #5 -->
+                       <a href="airtime2Cash.html">
+                            <div class="service-item">                      
+                                <button class="service-circle-btn">
+                                    <img src="assets/images/icons/airtime-to-cash.svg" alt="Airtime2Cash">
+                                </button>
+                                <p class="label">Airtime2Cash</p>
+                            </div>
+                       </a>
+                      
+
+                      <div class="service-item">
+                        <button class="service-circle-btn">
+                          <img src="assets/images/icons/education.svg" alt="Education">
+                        </button>
+                        <p class="label">Education</p>
+                      </div>
+
+                      <div class="service-item">
+                        <button class="service-circle-btn">
+                          <img src="assets/images/icons/electricity.svg" alt="Electricity">
+                        </button>
+                        <p class="label">Electricity</p>
+                      </div>
+
+                      <a href="tv.html">
+                        <div class="service-item">                      
+                            <button class="service-circle-btn">
+                                <img src="assets/images/icons/tv.svg" alt="TV">
+                            </button>
+                            <p class="label">TV</p>
+                        </div>
+                   </a>
+                    
+                      <div class="service-item">
+                        <button class="service-circle-btn">
+                          <img src="assets/images/icons/money-bag.svg" alt="Refer&Earn">
+                        </button>
+                        <p class="label">Refer&Earn</p>
+                      </div>
+
+                    </div>
+                  </section>
+                  
+            </div>
+
+            <!-- COLUMN 2 -->
+            <div class="column" id="column-2">
+                <!-- Money Flow, Transactions, CTA, etc. -->
+                <!-- MONEY FLOW -->
+                <section class="money-flow" id="money-flow-section">
+                    <div class="chart-container">
+                        <h2>Money Flow</h2>
+                        <canvas id="money-flow-chart"></canvas>
+                    </div>
+                </section>
+
+                <!-- TRANSACTIONS (Main / Additional) -->
+                <section class="transactions transactions-main" id="transactions-main-section">
+                    <!-- Transactions Header -->
+                    <div class="transactions-header">
+                      <h2>Transactions</h2>
+                      <a href="transactionHistory.html" class="view-all">
+                        <span>View All</span>
+                        <i class="chevron"></i>
+                      </a>
+                    </div>
+                  
+                    <!-- Transactions List (dynamically populated) -->
+                    <div class="transaction-list">
+                      <!-- Dynamic content will be injected here by your JavaScript -->
+                    </div>
+                </section>
+
+                <section class="referral-bonus" id="referral-bonus-1-section">
+                    <h2>Referral Bonus</h2>
+                    <p>₦0.00</p>
+                </section>
+
+                <!-- REFERRAL BONUS (2) -->
+                <!-- <section class="referral-bonus" id="referral-bonus-2-section">
+                    <h2>Referral Bonus</h2>
+                    <p>₦0.00</p>
+                </section>                -->
+
+                <section class="carousel-services-block" id="carousel-services">
+                
+                    <div class="carousel-container">
+                        <div class="carousel-track">
+                            <!-- Slide 1: an Image -->
+                            <div class="carousel-item">
+                                <img src="assets/images/icons/fund-your-account.svg" alt="Slide 1">
+                            </div>
+                            <!-- Slide 2: an Image -->
+                            <div class="carousel-item">
+                                <img src="path/to/image2.jpg" alt="Slide 2">
+                            </div>
+                            <!-- Slide 3: an Image -->
+                            <div class="carousel-item">
+                                <img src="path/to/image3.jpg" alt="Slide 3">
+                            </div>
+                            <!-- Slide 4: a div content -->
+                            <div class="carousel-item">
+                                <div class="carousel-content">
+                                    <h4>Some Title</h4>
+                                    <p>This is a div-based slide with text or other content.</p>
+                                </div>
+                            </div>
+                            <!-- Slide 5: another div content -->
+                            <div class="carousel-item">
+                                <div class="carousel-content">
+                                    <img src="assets/images/icons/profile.svg" alt="Slide 1">
+                                    <h4>Another hththth Title</h4>
+                                    
+                                </div>
+                            </div>
+                        </div> <!-- /.carousel-track -->
+
+                        <!-- Pagination Dots OVER the slides -->
+                        <div class="carousel-dots" id="carouselDots"></div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </main>
+</div><!-- /.content-wrapper -->
+
+<!-- FOOTER (MOBILE NAV) -->
+<footer class="mobile-footer">
+    <a href="#" class="active">Home</a>
+    <a href="#">Finance</a>
+    <a href="#">Cards</a>
+    <a href="#">More</a>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+<script src="js/dasboard.js"></script>
+</body>
+</html>

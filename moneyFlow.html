@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Money Flow</title>
+
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/servicesComponents.css" />
+  <!-- <link rel="stylesheet" href="css/moneyFlow.css" /> -->
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+
+  <style>
+    .balance-card {  
+        margin-bottom: 1rem;
+        display: flex;
+        flex-direction: column; 
+    }
+
+    /* Available Balance and Icon Row */
+    .available-text p {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0;
+        gap: 0;
+    }
+    /* Balance and Add Money Row */
+    .balance-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap; /* Ensures responsiveness */
+    }
+
+    .balance-container h2 {
+        margin: 0;
+        font-size: 1.5rem;
+        white-space: nowrap; 
+    }  
+
+    /* CHART CONTAINER */
+    .chart-container {
+      background-color: #f7f7f7;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      margin-bottom: 30px;
+    }
+    .chart-container h2 {
+      font-size: 1rem;
+      margin: 0 0 1rem;
+      text-align: left;
+
+      
+    }
+
+    /* SUMMARY CARDS WRAPPER */
+    .cards-container {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap; 
+      justify-content: center;
+    }
+
+    /* CARD STYLING */
+    .card {
+      position: relative;
+      flex: 1 1 0; 
+      border-radius: 8px;
+      color: #fff;
+      overflow: hidden;
+      min-height: 180px;
+      max-width: 400px;
+      padding: 1rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+   
+    /* Large circular shapes in the corners (faint) */
+    .card::before, .card::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      
+      opacity: 0.1;
+    }
+    .card::before {
+  
+      border: 2px solid #fff;
+      top: -30px;
+      left: -30px;
+      width: 100px;
+      height: 100px;
+    }
+    .card::after {
+      background: #fff;
+      bottom: -40px;
+      right: -75px;
+      width: 200px;
+      height: 200px;
+    }
+
+    /* BIG ARROW MOVED TO BOTTOM-RIGHT */
+    .big-arrow {
+      position: absolute;
+      width: 75px;  
+      height: 80px;
+      bottom: 40px;  
+      right: 0px;  
+      z-index: 1;
+    }
+    
+    .big-arrow img {
+      width: 100%;
+      height: auto;
+      display: block;
+
+    }
+
+    /* CARD CONTENT (TEXT + SMALL ICON) */
+    .card-content {
+      position: relative;
+      z-index: 2; 
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: flex-end; 
+    }
+
+    /* SMALL ARROW MOVED TO TOP-LEFT */
+    .small-arrow {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: 20px;
+      left: 20px;
+      width: 24px;  
+      height: 24px;
+      border-radius: 50%;
+      background-color: #fff;
+      opacity: 0.9;
+    }
+    .small-arrow img {
+      width: 50%;
+      height: 50%;
+      display: block;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      margin-bottom: 4px;
+      font-weight: 500;
+      text-align: left;
+    }
+    .card-amount {
+      font-size: 1.1rem;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    /* INCOME CARD */
+    .income-card {
+      background-color: var(--primary);
+    }
+   
+
+    /* EXPENSE CARD */
+    .expense-card {
+      background-color: var(--secondary);
+    }
+   
+  </style>
+</head>
+<body>
+    <div class="main-container">
+
+        <!-- BALANCE INFO -->
+        <!-- <div class="balance-container">
+          <h3 class="balance-title">Available Balance</h3>
+          <p class="balance-amount">N21,200.54</p>
+        </div> -->
+
+        <div class="balance-card">
+            <div class="available-text">
+                <p>Available Balance</p>
+            </div>
+            <div class="balance-container">
+                <h2 id="balance-text">₦18,000.00</h2>                
+            </div>
+        </div>
+
+        <section class="money-flow" id="money-flow-section">
+            <div class="chart-container">
+                <h2>Money Flow</h2>
+                <canvas id="money-flow-chart"></canvas>
+            </div>
+        </section>
+
+        <!-- SUMMARY CARDS -->
+        <div class="cards-container">
+        
+          <!-- INCOME CARD -->
+          <div class="card income-card">
+            <!-- Big arrow in the background -->
+            <div class="big-arrow">
+     
+              <img src="assets/images/icons/arrow-blue.svg" alt="Arrow icon" />
+            </div>
+            <!-- Smaller arrow top-left -->
+            <div class="small-arrow">
+              <img src="assets/images/icons/arrow-blue.svg" alt="Arrow icon" />
+            </div>
+            <div class="card-content">
+              <p class="card-title">Income</p>
+              <p class="card-amount">₦160,000.00</p>
+            </div>
+          </div>
+      
+          <!-- EXPENSE CARD -->
+          <div class="card expense-card">
+            <!-- Big arrow in the background -->
+            <div class="big-arrow">
+              <img src="assets/images/icons/arrow-orange.svg" alt="Arrow icon" />
+            </div>
+            <!-- Smaller arrow top-left -->
+            <div class="small-arrow">
+              <img src="assets/images/icons/arrow-orange.svg" alt="Arrow icon" />
+            </div>
+            <div class="card-content">
+              <p class="card-title">Expense</p>
+              <p class="card-amount">₦38,789.46</p>
+            </div>
+          </div>
+
+        </div>
+    </div>
+
+  <!-- CHART SCRIPT -->
+  <script>
+    const ctx = document.getElementById('money-flow-chart').getContext('2d');
+
+    const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+    const incomeData = [40000, 30000, 35000, 15000, 10000, 38000];
+    const expenseData = [20000, 12000, 9000, 7000, 5000, 10000];
+
+    const data = {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Income',
+          data: incomeData,
+          backgroundColor: '#146EF5', 
+          barPercentage: 0.65,       
+          categoryPercentage: 0.9,
+          barThickness: 12,
+          borderRadius: 8,
+        },
+        {
+          label: 'Expense',
+          data: expenseData,
+          backgroundColor: '#f6a74a', 
+          barPercentage: 0.65,       
+          categoryPercentage: 0.9,
+          barThickness: 12,
+          borderRadius: 8,
+        },
+      ]
+    };
+
+    const options = {
+      responsive: true,
+      maintainAspectRatio: false, 
+      scales: {
+        x: {
+          grid: {
+            display: false, 
+          },
+        },
+        y: {
+          beginAtZero: true,
+          grid: {
+            color: '#ddd',
+            borderDash: [4, 4],  
+            drawBorder: false,
+          },
+          ticks: {
+            callback: function(value) {
+             
+              return '₦' + value.toLocaleString();
+            },
+          },
+        },
+      },
+      plugins: {
+        legend: {
+          position: 'bottom', 
+          labels: {
+            boxWidth: 12,
+            boxHeight: 12,
+            borderRadius: 4,
+            
+          },
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const label = context.dataset.label || '';
+              const value = context.parsed.y;
+              return `${label}: ₦${value.toLocaleString()}`;
+            },
+          },
+        },
+      },
+    };
+
+
+    const canvas = document.getElementById('money-flow-chart');
+    canvas.parentNode.style.height = '300px'; 
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: data,
+      options: options,
+    });
+  </script>
+</body>
+</html>

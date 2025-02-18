@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Get in touch with Mevapay for inquiries, support, and feedback. We're here to help you with your payment needs, including airtime, data, and utility bill services in Nigeria.">
+    <meta name="keywords" content="Contact Mevapay, Mevapay support, Customer service, Payment inquiries, Airtime, Data, Utility payments">
+    
+    <meta property="og:title" content="Mevapay - Contact">
+    <meta property="og:description" content="Reach out to Mevapay for support or inquiries about our fast, smart, and reliable payment services. We're here to help.">
+    <meta property="og:image" content="https://www.mevapay.com.ng/assets/images/logos/og-image.jpg">
+    <meta property="og:url" content="https://www.mevapay.com.ng/contactus">
+    <meta property="og:type" content="website">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mevapay - Contact">
+    <meta name="twitter:description" content="Have questions or need help? Contact Mevapay for fast, reliable support for your payment needs, including airtime and utility bills.">
+    <meta name="twitter:image" content="https://www.mevapay.com.ng/assets/images/logos/twitter-card.jpg">
+    <link rel="canonical" href="https://www.mevapay.com.ng/contactus">
+
+    <link rel="icon" type="image/x-icon" href="/assets/images/logos/favicon.ico" />
+    <link rel="icon" type="image/png" href="/assets/images/logos/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/assets/images/logos/favicon.svg" />
+    <link rel="shortcut icon" href="/assets/images/logos/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/logos/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Mevapay - Contact" />
+
+    <title>Mevapay - Contact</title>
+    
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/contactUS.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"> 
+</head>
+<body>
+<header class="sticky-header">
+    <div class="header-container">
+        <div class="logo">
+            <a href="index.html" class="btn">
+                <img src="assets/images/logos/logo-full.svg" alt="Mevapay Logo">
+            </a>
+        </div>
+        <!-- Burger Menu for Mobile -->
+        <div class="burger-menu" id="burger-menu">
+            <span></span>
+            <span class="secondary-color"></span>
+            <span></span>
+        </div>
+        <!-- Navigation Links -->
+        <nav class="nav-links" id="nav-links">
+            <a href="login.html" class="btn">Login</a>
+            <a href="signup.html" class="btn">Sign Up</a>
+        </nav>
+    </div>
+</header>
+
+ <div class="contact-container">
+        <!-- Left Section -->
+        <div class="contact-info">
+            <h3>Let’s get in touch</h3>
+            <p>We’d love to hear from you! Reach out to us for any inquiries, feedback, or assistance.</p>
+            <ul>
+                <li style="font-size: 15px"><strong>Email:</strong>
+                    <a style="color: #555" href="mailto:support@mevapay.com.ng">support@mevapay.com.ng</a>
+                </li>
+                <li style="font-size: 14px"><strong>Phone:</strong> +234 123 456 789</li>
+            </ul>
+            
+            <div class="social-icons">
+                <h4 >Connect with us:</h4>
+                <ul>
+                    <li class="item">
+                        <a href="https://facebook.com/mevapay" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-brands fa-facebook icon"></i>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="https://instagram.com/mevapay" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-brands fa-instagram icon"></i>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="https://threads.net/@mevapay" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-brands fa-threads icon"></i>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="https://x.com/mevapay" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-brands fa-x-twitter icon"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Right Section -->
+        <div class="contact-form">
+            <h3>Contact Us</h3>
+            <form id="contactForm">
+                <label for="name">Username</label>
+                <input type="text" id="name" name="name" placeholder="Your Username" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Your Email" required>
+
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" placeholder="Your Phone" 
+                       pattern="^\+?[0-9]{10,15}$" inputmode="tel" 
+                       title="Enter a valid phone number" required>
+
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject" placeholder="Enter Subject" required>
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Your Message" rows="8" required></textarea>
+
+                <!-- Consent Checkbox -->
+                <div>
+                    <div class="checkbox-row">
+                        <input type="checkbox" id="marketingConsent" name="marketingConsent" value="yes">
+                        <label for="marketingConsent">
+                            Yes, I would like to receive marketing communication regarding Mevapay's products, services, and events.
+                        </label>
+                    </div>
+                    <div class="privacy-text">
+                        By submitting this form, you agree to the processing of personal data according to our 
+                        <a href="privacyPolicy.html" target="_blank">Privacy Policy</a>.
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" id="submitBtn">Send</button>
+            </form>
+        </div>
+    </div>
+<footer>
+    <!-- Overlapping CTA Container -->
+    <div class="cta-container">
+        <h3>Create an account in one click</h3>
+        <button>
+            <a href="signup.html" class="btn">Sign Up</a>
+        </button>
+    </div>
+
+    <!-- Footer Content -->
+    <div class="footer-content">
+        <!-- Social Icons -->
+        <div class="social-icons">
+            <h4 >Connect with us:</h4>
+            <ul>
+                <li class="item">
+                    <a href="https://facebook.com/mevapay" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-facebook icon"></i>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="https://instagram.com/mevapay" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-instagram icon"></i>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="https://threads.net/@mevapay" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-threads icon"></i>
+                    </a>
+                </li>
+                <li class="item">
+                    <a href="https://x.com/mevapay" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-x-twitter icon"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+        <div>
+            <ul class="footer-links">
+                <li>
+                    <h3>Company</h3>
+                    <a href="aboutUs.html">About</a>
+                    <a href="#">Press</a>
+                    <a href="#">Partners</a>
+                    <!-- <a href="#">Careers</a> -->
+                </li>
+                <li>
+                    <h3>Legal</h3>
+                    <a href="privacyPolicy.html">Privacy Policy</a>
+                    <a href="termsAndConditions.html">Terms & conditions</a>
+                    <!-- <a href="#">complaints</a> -->
+                </li>
+                <li>
+                    <h3>Help</h3>
+                    <a href="faqs.html">FAQs</a>
+                    <!-- <a href="#">Security</a> -->
+                    <a href="contactUs.html">Contact Us</a>
+                </li>
+                <!-- <li>
+                    <h3>Lorem</h3>
+                    <a href="#">Ipsum</a>
+                    <a href="#">Lorem ipsum.</a>
+                    <a href="#">Odor amet</a>
+                    <a href="#">consectetuer</a>
+                </li> -->
+            </ul>
+        </div>
+
+        <div class="copyright">
+            <p>© 2025 Mevapay Solutions. All rights reserved.</p>
+        </div>
+    </div>
+
+</footer>
+<script src="js/main.js"></script>
+<script src="js/contactUs.js"></script>
+</body>
+</html>
