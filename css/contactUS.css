@@ -1,0 +1,179 @@
+/*contact form*/
+.contact-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    margin-top: 5rem;
+    padding: 3rem 2rem 200px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.contact-info, .contact-form {
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    flex: 1 1 400px;
+    max-width: 600px;
+    transform: translateY(10px);
+    opacity: 0;
+    animation: slideUp 1s ease-in-out forwards;
+}
+
+.contact-info h3, .contact-form h3 {
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.contact-info p {
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.contact-info ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+}
+
+.contact-info ul li {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.contact-info .social-icons a {
+    text-decoration: none;
+    color: var(--primary);
+    font-size: 12px;
+    transition: color 0.3s ease;
+}
+
+.contact-info .social-icons a:hover {
+    color: #0046a3; /*  darker shade */
+}
+
+.contact-form label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+    color: #333;
+    animation: fadeIn 1.2s ease-in-out;
+}
+
+.contact-form input, .contact-form textarea {
+    font-family: inherit;
+    font-size: 16px;
+    resize: none;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.contact-form input:focus, .contact-form textarea:focus {
+    transform: scale(1.01);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Align checkbox and label */
+.checkbox-row {
+    display: flex;
+    align-items: center; 
+    gap: 10px; 
+    margin-bottom: 5px; 
+}
+
+/* Style for the checkbox */
+input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* Style for the label text */
+label[for="marketingConsent"] {
+    
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Style for the privacy text */
+.privacy-text {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+    margin-left: 26px; /* Align privacy text with the start of label text */
+}
+
+/* Link styling for Privacy Policy */
+.privacy-text a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.privacy-text a:hover {
+    text-decoration: underline;
+}
+
+
+
+.contact-form button {
+    width: 100px;
+    padding: 10px;
+    background: var(--primary);
+    color: var(--white);
+    font-size: 16px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+
+.contact-form button:hover {
+    background: var(--white);
+    color: var(--primary);
+    border: 1px solid #a6c3f3;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .contact-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .contact-container {
+       
+        margin-top: 5rem;
+        padding: 20px 20px 150px;
+        animation: fadeIn 1s ease-in-out;
+        align-content: center;
+    }
+}
