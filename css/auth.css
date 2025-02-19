@@ -1,9 +1,9 @@
-/* Auth Pages  Form */
+/* Auth Pages Form */
 .auth-container {
     max-width: 600px;
-    margin: 8rem auto 1rem;
+    margin: 6rem auto 1rem;
     background: var(--white);
-    padding: 20px;
+    padding: 1rem;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -34,10 +34,9 @@ input {
     border-radius: 4px;
     outline: none;
     animation: fadeIn 1.2s ease-in-out;
-
 }
 
-input:focus{
+input:focus {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transform: scale(1.01);
 }
@@ -78,41 +77,52 @@ a:hover {
 }
 
 .password-container input {
-    flex: 1; /* Input takes full width */
-    padding-right: 40px; /* Add space for the icon */
+    flex: 1;
+    padding-right: 40px; 
 }
 
-.password-container img {
+
+.icon-wrapper {
     position: absolute;
-    right: 10px; /* Place the icon 10px from the right edge */
-    top: 40%; /* Align the icon vertically */
-    transform: translateY(-50%); /* Adjust for exact centering */
-    cursor: pointer;
-    width: 20px;
-    height: 20px;
-    object-fit: contain; 
-    transition: none; 
+    right: 10px;
+    top: 40%;
+    transform: translateY(-50%);
+    width: 20px;  
+    height: 20px; 
 }
+
+
+.icon-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    cursor: pointer;
+    transition: none;
+}
+
 
 .password-container .toggle-password:hover {
-    opacity: 0.8; /* Optional: Add hover effect */
+    opacity: 0.8; 
 }
 
-input::-ms-reveal, input::-ms-clear {
+
+input::-ms-reveal, 
+input::-ms-clear {
     display: none;
 }
 
-input::-webkit-inner-spin-button, input::-webkit-clear-button {
+input::-webkit-inner-spin-button, 
+input::-webkit-clear-button {
     display: none;
 }
 
 input[type="password"]::-webkit-textfield-decoration-container {
     display: none;
 }
+
+/* Responsive */
 @media (max-width: 768px) {
     .auth-container {
-        
-        margin: 8rem 1rem 1rem;
-       
+        margin: 6rem 1rem 1rem;
     }
 }

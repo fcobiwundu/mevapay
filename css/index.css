@@ -74,7 +74,7 @@
 
 .about-grid {
     display: flex;
-    gap: 20px;
+    gap: 1rem;
     margin-top: 50px;
     height: 20rem;
     flex-wrap: wrap; 
@@ -134,7 +134,7 @@ strong{
 .features-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    gap: 1rem;
 }
 
 /* Initial hidden state */
@@ -142,7 +142,7 @@ strong{
     background: var(--white);
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    padding: 1rem;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -216,7 +216,7 @@ strong{
     .about-grid {
         display: flex;
         flex-direction: column; 
-        gap: 20px;
+        gap: 1rem;
 
     }
 
@@ -288,7 +288,7 @@ strong{
 .flip-back {
     color: var(--white);
     transform: rotateY(179.9deg);
-    padding: 15px;
+    padding: 1rem;
 }
 
 /* Flip Effect Triggered by Scroll */

@@ -686,8 +686,7 @@ main {
 }
 .service-item .label {
     margin-top: 0.5rem;
-    font-size: 1rem;
-    
+    font-size: 1rem; 
 }
 
 /* .new-badge {
@@ -1008,6 +1007,13 @@ main {
 /* -----------------------------------
    13. Media Queries
 -------------------------------------*/
+@media(max-width: 380px){
+    .service-item .label {
+        font-size: 0.8rem !important;
+        
+    }
+}
+
 @media(max-width: 480px){
     .actions {
         display: flex;
@@ -1023,6 +1029,10 @@ main {
     }
     .column{
         margin-top: 0.50rem !important;
+    }
+    .service-item .label {
+        font-size: 0.9rem !important;
+        
     }
 }
 
