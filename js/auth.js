@@ -19,6 +19,10 @@ function togglePasswordVisibility(fieldId, iconElement) {
         passwordField.type = "password";
         iconElement.src = "assets/images/icons/eye.svg"; // Change back to "show" icon
     }   
+
+    // Ensure consistent size
+    iconElement.style.width = "20px"; 
+    iconElement.style.height = "20px"; 
 }
 
 // Smooth Scrolling for Anchor Links
