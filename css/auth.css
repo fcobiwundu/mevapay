@@ -90,8 +90,9 @@ a:hover {
     cursor: pointer;
     width: 20px;
     height: 20px;
+    object-fit: contain; 
+    transition: none; 
 }
-
 
 .password-container .toggle-password:hover {
     opacity: 0.8; /* Optional: Add hover effect */
