@@ -1,6 +1,6 @@
 # Mevapay 🚀  
 
-**Fast, Smart, Reliable Payment Solutions**  
+**Fast. Smart. Reliable. Payment Solutions**  
 
 Mevapay is a seamless Virtual Top-Up (VTU) and utility payment service that allows users to:
 - Buy **Airtime** and **Data** for all major network providers.
