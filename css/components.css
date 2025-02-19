@@ -76,6 +76,7 @@ strong{
         flex-direction: column;
         position: absolute;
         top: 70px; 
+        left: 0;
         width: 100%;
         background: var(--white);
         box-shadow: 0 4px 10px var(--box-shadow-medium);
@@ -110,7 +111,7 @@ strong{
 /* This section is in the index.html but resused in faqs.html pages */
 
 .faq {
-    padding: 40px 20px;
+    padding: 40px 1rem 0;
     background: var(--white);
 }
 
@@ -205,7 +206,13 @@ details .cta-btn:hover {
 
 
 
-
+/* Support Section */
+.support {
+    text-align: center;
+    margin-bottom: 120px;
+    padding: 0 20px 40px;
+    background: var(--white); /* White background */
+}
 
 
 footer {
