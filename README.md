@@ -55,5 +55,3 @@ Ensure you have the following installed:
 This project is proprietary and owned by Mevapay Solutions. Unauthorized distribution or modification is prohibited.
 
 
-
-# mevapaydemo
