@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- All meta tags remain unchanged -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -45,29 +46,61 @@
     <form id="signup-form">
         <h2>Create Your Account</h2>
         <p>Sign up to start using Mevapay.</p>
+
         <label for="first-name">First Name</label>
         <input type="text" id="first-name" name="first-name" placeholder="Enter Your first Name" required>
+
         <label for="last-name">Last Name</label>
         <input type="text" id="last-name" name="last-name" placeholder="Enter Your last Name" required>
+
         <label for="mobile-number">Mobile Number</label>
         <input type="text" id="mobile-number" name="mobile-number" placeholder="Enter Your Mobile Number" required>
+
         <label for="email">Email</label>
         <input type="email" id="email" name="email" placeholder="Enter Your Email" required>
+
         <label for="username">Username</label>
         <input type="text" id="username" name="username" placeholder="Enter Username" required>
 
         <label for="password">Password</label>
         <div class="password-container">
-            <input type="password" id="password" name="password"  autocomplete="new-password" placeholder="Enter your password" required>
-            <img src="assets/images/icons/eye.svg" alt="Show Password" class="toggle-password"
-                 onclick="togglePasswordVisibility('password', this)">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              autocomplete="new-password"
+              placeholder="Enter your password"
+              required
+            />
+            <!-- Wrapped icon in .icon-wrapper -->
+            <span class="icon-wrapper">
+              <img
+                src="assets/images/icons/eye.svg"
+                alt="Show Password"
+                class="toggle-password"
+                onclick="togglePasswordVisibility('password', this)"
+              />
+            </span>
         </div>
 
         <label for="confirm-password">Confirm Password</label>
         <div class="password-container">
-            <input type="password" id="confirm-password" name="confirm-password" placeholder="Retype your password" required>
-            <img src="assets/images/icons/eye.svg" alt="Show Password" class="toggle-password"
-                 onclick="togglePasswordVisibility('confirm-password', this)">
+            <input
+              type="password"
+              id="confirm-password"
+              name="confirm-password"
+              placeholder="Retype your password"
+              required
+            />
+            <!-- Same .icon-wrapper pattern -->
+            <span class="icon-wrapper">
+              <img
+                src="assets/images/icons/eye.svg"
+                alt="Show Password"
+                class="toggle-password"
+                onclick="togglePasswordVisibility('confirm-password', this)"
+              />
+            </span>
         </div>
 
         <button type="submit" class="auth-btn">Sign up</button>
@@ -75,7 +108,7 @@
     </form>
 </main>
 
+
 <script src="js/auth.js"></script>
 </body>
 </html>
-

@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Airtime</title>
-  <!-- Include your CSS files -->
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/servicesComponents.css" />
   <link rel="stylesheet" href="css/airtime.css" />
@@ -12,11 +11,6 @@
   <link rel="stylesheet" href="css/loading.css" />
 
   <style>
-    /* =========================
-       KEEPING YOUR ORIGINAL CODE
-       ONLY REMOVING TABS + HIDING NUMBER SPINNERS
-       AND ADDING A CHECKBOX FOR BYPASS
-       ========================= */
 
     .service-providers {
       display: flex;
@@ -590,7 +584,7 @@
       <label for="recipient-phone" style="display:block; text-align:left; font-weight:bold;">
         Phone Number:
       </label>
-      <input type="text" id="recipient-phone" placeholder="Enter recipient phone number" maxlength="11">
+      <input type="text" id="recipient-phone" placeholder="Enter recipient phone number" pattern="\d{11}" maxlength="11">
       <p id="phone-error" class="error-message"></p>
     </div>
     <!-- Bypass Container OUTSIDE the .phone-input -->
@@ -910,7 +904,7 @@
       function isPhoneValid() {
         const phoneVal = recipientPhoneInput.value.trim();
         // Bypass only means we skip verifying the *network*, not the length
-        if (phoneVal.length !== 11) {
+        if (!/^\d{11}$/.test(phoneVal)) {
           return false;
         }
         if (!isNetworkSelectedOrBypassed()) {
@@ -928,7 +922,7 @@
           recipientPhoneInput.classList.add("invalid");
           return;
         }
-        if (phoneVal.length < 11) {
+        if (!/^\d{11}$/.test(phoneVal)) {
           phoneErrorEl.textContent = "Please enter a valid phone number.";
           recipientPhoneInput.classList.add("invalid");
         } else {
@@ -999,7 +993,7 @@
       bypassNetworkCheckbox.addEventListener("change", () => {
         loadOffers();
         const phoneVal = recipientPhoneInput.value.trim();
-        if (phoneVal.length < 11) {
+        if (!/^\d{11}$/.test(phoneVal)) {
           phoneErrorEl.textContent = "Please enter a valid phone number.";
           recipientPhoneInput.classList.add("invalid");
         } else {
@@ -1016,7 +1010,7 @@
           selectedNetwork = logo.getAttribute("airtime-network");
 
           const phoneVal = recipientPhoneInput.value.trim();
-          if (phoneVal.length < 11) {
+          if (!/^\d{11}$/.test(phoneVal)) {
             phoneErrorEl.textContent = "Please enter a valid phone number.";
             recipientPhoneInput.classList.add("invalid");
           } else {
@@ -1131,7 +1125,7 @@
         if (!customAmountPayBtn.classList.contains("enabled")) return;
 
         const phoneVal = recipientPhoneInput.value.trim();
-        if (phoneVal.length !== 11) {
+        if (!/^\d{11}$/.test(phoneVal)) {
           showModal(noNumberModal);
           return;
         }

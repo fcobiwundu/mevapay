@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Data</title>
-  <!-- Include your CSS files -->
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/servicesComponents.css" />
   <link rel="stylesheet" href="css/data.css" />
@@ -583,7 +582,7 @@
       <label for="recipient-phone" style="display:block; text-align:left; font-weight:bold;">
         Phone Number:
       </label>
-      <input type="text" id="recipient-phone" placeholder="Enter recipient phone number" maxlength="11">
+      <input type="text" id="recipient-phone" placeholder="Enter recipient phone number" pattern="\d{11}" maxlength="11">
       <p id="phone-error" class="error-message"></p>
     </div>
 
@@ -897,7 +896,7 @@
         if (!selectedNetwork) {
           return false;
         }
-        if (phoneVal.length !== 11) {
+        if (!/^\d{11}$/.test(phoneVal)) {
           return false;
         }
         return true;
@@ -913,7 +912,7 @@
           return;
         }
 
-        if (phoneVal.length < 11) {
+        if (!/^\d{11}$/.test(phoneVal)) {
           phoneErrorEl.textContent = "Please enter a valid phone number.";
           recipientPhoneInput.classList.add("invalid");
         } else {

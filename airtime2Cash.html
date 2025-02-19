@@ -62,12 +62,12 @@
         <label for="receive-amount">Amount You Will Receive:</label>
         <div class="output-field" id="receive-amount">₦0</div>
 
-        <label for="phone-number">Phone:</label>
-        <input type="text" id="phone-number" placeholder="Enter your phone number" pattern="\d{11}" required>
+        <label for="phone-number">Phone Number:</label>
+        <input type="text" id="phone-number" placeholder="Enter your phone number" pattern="\d{11}" required maxlength="11">
         <div class="error" id="phone-error">Phone number must be 11 digits.</div>
 
         <label for="account-number">Account Number:</label>
-        <input type="text" id="account-number" placeholder="Enter your account number" pattern="\d{10}" required>
+        <input type="text" id="account-number" placeholder="Enter your account number" pattern="\d{10}" required maxlength="10">
         <div class="error" id="account-error">Account number must be 10 digits.</div>
 
         <label for="account-name">Account Name:</label>
