@@ -179,10 +179,10 @@ function toggleBalanceVisibility(balanceId, iconElement) {
     // Toggle between showing actual balance and placeholder
     if (balanceText.textContent === hiddenPlaceholder) {
         balanceText.textContent = actualBalance; 
-        iconElement.src = "assets/images/icons/eye-slash.svg"; 
+        iconElement.src = "assets/images/icons/eye.svg"; 
     } else {
         balanceText.textContent = hiddenPlaceholder; 
-        iconElement.src = "assets/images/icons/eye.svg"; 
+        iconElement.src = "assets/images/icons/eye-slash.svg"; 
     }
 }
 

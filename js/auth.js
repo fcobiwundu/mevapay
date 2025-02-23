@@ -13,11 +13,11 @@ function togglePasswordVisibility(fieldId, iconElement) {
     const passwordField = document.getElementById(fieldId);
     if (passwordField.type === "password") {
         passwordField.type = "text";
-        iconElement.src = "assets/images/icons/eye-slash.svg"; // Change to "hide" icon
+        iconElement.src = "assets/images/icons/eye.svg"; // Change to "hide" icon
 
     } else {
         passwordField.type = "password";
-        iconElement.src = "assets/images/icons/eye.svg"; // Change back to "show" icon
+        iconElement.src = "assets/images/icons/eye-slash.svg"; // Change back to "show" icon
     }   
 
     // Ensure consistent size

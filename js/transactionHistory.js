@@ -109,3 +109,27 @@ document.addEventListener("DOMContentLoaded", async function () {
         console.error("Error fetching transaction history:", error);
     }
 });
+
+const sliderContainer = document.getElementById('sliderContainer');
+const btnTransactions = document.getElementById('btnTransactions');
+const btnMoneyFlow = document.getElementById('btnMoneyFlow');
+const headerTitle = document.getElementById('headerTitle');
+let currentSlide = 0; // 0 => Transaction, 1 => Money Flow
+function goToSlide(index) {
+  currentSlide = index;
+  sliderContainer.style.transform = `translateX(-${100 * index}vw)`; 
+  // highlight correct button & change header
+  if (index === 0) {
+    headerTitle.textContent = 'Transaction History';
+    btnTransactions.classList.add('active');
+    btnMoneyFlow.classList.remove('active');
+  } else {
+    headerTitle.textContent = 'Money Flow';
+    btnTransactions.classList.remove('active');
+    btnMoneyFlow.classList.add('active');
+  }
+}
+// On page load => show Transaction History
+goToSlide(0);
+btnTransactions.addEventListener('click', () => goToSlide(0));
+btnMoneyFlow.addEventListener('click', () => goToSlide(1));
