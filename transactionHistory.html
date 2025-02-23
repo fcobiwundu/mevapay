@@ -3,349 +3,117 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Transaction History</title>
-  <!-- Include your CSS files -->
+  <title>Transactions & Money Flow</title>
+
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/servicesComponents.css" />
   <link rel="stylesheet" href="css/transactionHistory.css" />
-  <!-- Loading CSS -->
   <link rel="stylesheet" href="css/loading.css" />
+  <link rel="stylesheet" href="css/moneyFlow.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+  
 </head>
-<style>
-.transaction-history{
-    margin: 4.50rem auto 1rem;
-    max-width: 600px;
-    padding: 1rem;
-}
 
-/* Filters */
-.filter-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 1rem;
-}
-
-.filter-container input, .filter-container select {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.filter-container button {
-    padding: 8px 12px;
-    background: var(--primary);
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-/* Transactions List */
-.transaction-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    padding: 1rem;
-    margin-top: 1rem;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.transaction-list h4 {
-    margin: 0;
-}
-
-.transaction-item {
-    background: #f7f7f7;
-    border-radius: 6px;
-    padding: 0.75rem;
-    display: flex;
-    align-items: center;
-}
-
-.transaction-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    width: 100%;
-}
-
-.transaction-icon {
-    background: #fff;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1rem;
-}
-
-.transaction-icon img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
-.transaction-details {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.transaction-title-amount {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.transaction-title-amount p {
-    font-size: 1rem;
-    margin: 0;
-    color: #333;
-}
-
-.amount {
-    font-size: 1rem;
-    font-weight: bold;
-}
-
-.amount.success.positive {
-    color: var(--primary);
-}
-
-.transaction-date-status {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.85rem;
-    color: #555;
-}
-
-.status {
-    font-size: 0.8rem;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-weight: bold;
-    text-transform: capitalize;
-}
-
-.status.success{
-    background-color: var(--light-blue-accent);
-    color: var(--primary);
-}
-
-.status.pending{
-    background-color: #f8f1e6;
-    color: #ff9800;
-}
-
-.status.failed {
-    background-color: #fce8ea;
-    color: #dc3545;
-}
-
-/* Pagination */
-.pagination {
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-    margin-top: 1rem;
-}
-
-.pagination-button {
-    padding: 6px 12px;
-    border: 1px solid var(--primary);
-    background: #fff;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-.pagination-button.active {
-    background: var(--primary);
-    color: #fff;
-}
-</style>
 <body>
+  <div class="wrapper">
+    <header>
+      <a href="dashboard.html" aria-label="Go back to dashboard">
+        <img src="assets/images/icons/back-icon.svg" alt="Back" />
+      </a>
+      <p id="headerTitle">Transaction History</p> 
+    </header>
 
-  <div id="loader-container"></div>
+    <div class="main-content">
 
-  <!-- Header -->
-  <header>
-    <a href="dashboard.html" aria-label="Go back to dashboard">
-      <img src="assets/images/icons/back-icon.svg" alt="Back" />
-    </a>
-    <p>Transaction History</p>
-  </header>
-
-  <div class="transaction-history">
-
-    <form id="filter-form" class="filter-container">
-        <input type="date" id="dateFrom" placeholder="From Date" />
-        <input type="date" id="dateTo" placeholder="To Date" />
-        <select id="status">
-          <option value="">All Status</option>
-          <option value="completed">Completed</option>
-          <option value="pending">Pending</option>
-          <option value="failed">Failed</option>
-        </select>
-        <select id="type">
-          <option value="">All Types</option>
-          <option value="airtime">Airtime</option>
-          <option value="funding">Funding</option>
-          <option value="meva_gift">Meva Gift</option>
-        </select>
-        <button type="submit">Filter</button>
-      </form>
-  
-      <div class="transaction-list"></div>
-      <div class="pagination"></div>
-
-    <!-- <div class="transaction-list">
-        <h4>Feb 2025</h4>
-        <div class="transaction-item">
-            <div class="transaction-left">
-                <div class="transaction-icon"> -->
-                    <!-- <span></span> --> <!-- Here should get the the icon of service or the action like data airtime, meva gift or add fund wallet(automated funding, manual funding or card funding) -->
-                <!-- </div>
-                <div class="transaction-details">
-                    <div class="transaction-title-amount">
-                        <p>Card Funding</p>
-                        <span class="amount success positive">+₦100.45</span>
-                    </div>
-                    <div class="transaction-date-status">
-                        <span class="date">Feb 11th, 03:56:03</span>
-                        <span class="status success">Successful</span>
-                    </div>
-                </div>
-            </div>
+      <div class="slider-container" id="sliderContainer">
+        
+        <div class="page" id="transactionPage">
+          <div id="loader-container"></div>
+          <div class="transaction-history">
+            <form id="filter-form" class="filter-container">
+              <input type="date" id="dateFrom" placeholder="From Date" />
+              <input type="date" id="dateTo" placeholder="To Date" />
+              <select id="status">
+                <option value="">All Status</option>
+                <option value="completed">Completed</option>
+                <option value="pending">Pending</option>
+                <option value="failed">Failed</option>
+              </select>
+              <select id="type">
+                <option value="">All Types</option>
+                <option value="airtime">Airtime</option>
+                <option value="funding">Funding</option>
+                <option value="meva_gift">Meva Gift</option>
+              </select>
+              <button type="submit">Filter</button>
+            </form>
+            <div class="transaction-list"></div>
+            <div class="pagination"></div>
+          </div>
         </div>
 
-        <div class="transaction-item">
-            <div class="transaction-left">
-                <div class="transaction-icon"> -->
-                    <!-- <span></span> --> <!-- Here should get the the icon of service or the action like data airtime, meva gift or add fund wallet(automated funding, manual funding or card funding) -->
-                <!-- </div>
-                <div class="transaction-details">
-                    <div class="transaction-title-amount">
-                        <p>Meva Gift</p>
-                        <span class="amount negative">-₦5,000.00</span>
-                    </div>
-                    <div class="transaction-date-status">
-                        <span class="date">Feb 10th, 16:21:10</span>
-                        <span class="status success">Successful</span>
-                    </div>
-                </div>
+        <div class="page" id="moneyFlowPage">
+          <div class="main-container">
+            <div class="balance-card">
+              <div class="available-text">
+                <p>Available Balance</p>
+              </div>
+              <div class="balance-container">
+                <h2 id="balance-text">₦11,570.60</h2>                
+              </div>
             </div>
-        </div>
 
-        <div class="transaction-item">
-            <div class="transaction-left">
-                <div class="transaction-icon">
-                    <span></span> 
+            <section class="money-flow" id="money-flow-section">
+              <div class="chart-container">
+                <h2>Money Flow</h2>
+                <canvas id="money-flow-chart"></canvas>
+              </div>
+            </section>
+
+            <!-- SUMMARY CARDS -->
+            <div class="cards-container">
+              <!-- INCOME CARD -->
+              <div class="card income-card">
+                <div class="big-arrow">
+                  <img src="assets/images/icons/arrow-blue.svg" alt="Arrow icon" />
                 </div>
-                <div class="transaction-details">
-                    <div class="transaction-title-amount">
-                        <p>Airtime</p>
-                        <span class="amount negative">-₦5,000.00</span>
-                    </div>
-                    <div class="transaction-date-status">
-                        <span class="date">Feb 9th, 18:11:30</span>
-                        <span class="status pending">Pending</span>
-                    </div>
+                <div class="small-arrow">
+                  <img src="assets/images/icons/arrow-blue.svg" alt="Arrow icon" />
                 </div>
+                <div class="card-content">
+                  <p class="card-title">Income</p>
+                  <p class="card-amount">₦160,000.00</p>
+                </div>
+              </div>
+              <!-- EXPENSE CARD -->
+              <div class="card expense-card">
+                <div class="big-arrow">
+                  <img src="assets/images/icons/arrow-orange.svg" alt="Arrow icon" />
+                </div>
+                <div class="small-arrow">
+                  <img src="assets/images/icons/arrow-orange.svg" alt="Arrow icon" />
+                </div>
+                <div class="card-content">
+                  <p class="card-title">Expense</p>
+                  <p class="card-amount">₦38,789.46</p>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
 
-    <div class="transaction-list">
-        <h4>Jan 2025</h4>
-        <div class="transaction-item">
-            <div class="transaction-left">
-                <div class="transaction-icon">
-                    <span></span>  -->
-                <!-- </div>
-                <div class="transaction-details">
-                    <div class="transaction-title-amount">
-                        <p>Manual Funding</p>
-                        <span class="amount success positive">+₦1000.15</span>
-                    </div>
-                    <div class="transaction-date-status">
-                        <span class="date">Jan 19th, 13:46:02</span>
-                        <span class="status success">Successful</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <footer class="footer-nav">
+      <button id="btnTransactions" class="active">Transaction History</button>
+      <button id="btnMoneyFlow">Money Flow</button>
+    </footer>
+  </div>
 
-        <div class="transaction-item">
-            <div class="transaction-left">
-                <div class="transaction-icon">
-                    <span></span> 
-                </div>
-                <div class="transaction-details">
-                    <div class="transaction-title-amount">
-                        <p>Betting</p>
-                        <span class="amount negative">-₦2,000.00</span>
-                    </div>
-                    <div class="transaction-date-status">
-                        <span class="date">Jan 15th, 06:11:19</span>
-                        <span class="status failed">Failed</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="transaction-list">
-        <h4>Dec 2024</h4>
-        <div class="transaction-item">
-            <div class="transaction-left">
-                <div class="transaction-icon"> -->
-                    <!-- <span></span> 
-                </div>
-                <div class="transaction-details">
-                    <div class="transaction-title-amount">
-                        <p>Automated Funding</p>
-                        <span class="amount success positive">+₦8900.00</span>
-                    </div>
-                    <div class="transaction-date-status">
-                        <span class="date">Dec 11th, 23:57:13</span>
-                        <span class="status success">Successful</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="transaction-item">
-            <div class="transaction-left">
-                <div class="transaction-icon">
-                    <span></span> 
-                </div>
-                <div class="transaction-details">
-                    <div class="transaction-title-amount">
-                        <p>Data</p>
-                        <span class="amount negative">-₦7,000.00</span>
-                    </div>
-                    <div class="transaction-date-status">
-                        <span class="date">Dec 4th, 02:51:17</span>
-                        <span class="status failed">failed</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-  </div> -->
-  
-   
-    
-
-  <!-- JS -->
-  <!-- Loading JS -->
+  <script src="js/moneyFlow.js"></script>
   <script src="js/transactionHistory.js"></script>
   <script src="js/loading.js"></script>
 </body>
 </html>
+
