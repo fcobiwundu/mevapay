@@ -1,0 +1,186 @@
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; 
+  overflow-x: hidden;
+}
+.footer-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-color: #f3f3f3;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-top: 1px solid #ccc;
+  z-index: 9999;
+}
+.footer-nav button {
+  border: none;
+  background: none;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
+.footer-nav button.active {
+  background-color: var(--primary);
+  color: #fff;
+}
+.main-content {
+  flex: 1;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  overflow-y: auto;
+  position: relative;
+  overflow-x: hidden;
+}
+.slider-container {
+  width: 200vw; /* 2 pages * 100vw each => 200vw */
+  display: flex;
+  transition: transform 0.4s ease;
+  overflow-x: hidden;
+}
+.page {
+  width: 100vw;
+  box-sizing: border-box;
+  padding-bottom: 80px;
+  overflow-x: hidden;
+}
+.transaction-history{
+  max-width: 600px;
+  padding: 1rem;
+  margin: 0 auto 1rem;
+}
+.filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+.filter-container input,
+.filter-container select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.filter-container button {
+  padding: 8px 12px;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.transaction-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  margin-top: 1rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.transaction-list h4 {
+  margin: 0;
+}
+.transaction-item {
+  background: #f7f7f7;
+  border-radius: 6px;
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+}
+.transaction-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+.transaction-icon {
+  background: #fff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+}
+.transaction-icon img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+.transaction-details {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.transaction-title-amount {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.transaction-title-amount p {
+  font-size: 1rem;
+  margin: 0;
+  color: #333;
+}
+.amount {
+  font-size: 1rem;
+  font-weight: bold;
+}
+.amount.success.positive {
+  color: var(--primary);
+}
+.transaction-date-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: #555;
+}
+.status {
+  font-size: 0.8rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+.status.success {
+  background-color: var(--light-blue-accent);
+  color: var(--primary);
+}
+.status.pending {
+  background-color: #f8f1e6;
+  color: #ff9800;
+}
+.status.failed {
+  background-color: #fce8ea;
+  color: #dc3545;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 1rem;
+}
+.pagination-button {
+  padding: 6px 12px;
+  border: 1px solid var(--primary);
+  background: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.pagination-button.active {
+  background: var(--primary);
+  color: #fff;
+}
